@@ -7,13 +7,41 @@
     
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://unpkg.com/lenis@1.0.42/dist/lenis.css">
     
     <style>
-      html {
-        scroll-behavior: smooth;
+      :root {
+        --baby-blue: #89CFF0;
+        --baby-blue-glow: rgba(137, 207, 240, 0.4);
       }
 
-      /* Hero Section Styling */
+      body {
+        background-color: #1a1a1a;
+        color: #e0e0e0;
+        overflow-x: hidden;
+      }
+
+      /* --- CRYSTAL CLEAR NAVBAR --- */
+      .navbar {
+        background: transparent !important;
+        backdrop-filter: none !important;
+        -webkit-backdrop-filter: none !important;
+        border-bottom: none !important;
+        padding: 20px 0;
+        z-index: 1000;
+      }
+
+      .nav-link {
+        color: rgba(255,255,255,0.8) !important;
+        font-weight: 500;
+        transition: 0.3s;
+      }
+
+      .nav-link:hover {
+        color: var(--baby-blue) !important;
+      }
+
+      /* --- HERO SECTION --- */
       #home {
         position: relative;
         background-image: url('images/f839845d5a8f6634e206e22fe8fc780e.gif');
@@ -22,8 +50,8 @@
         background-position: center center; 
         background-attachment: fixed;
         color: white;
-        padding: 150px 0;
-        min-height: 80vh;
+        padding: 250px 0 100px 0;
+        min-height: 100vh;
         display: flex;
         align-items: center;
       }
@@ -32,7 +60,7 @@
         content: "";
         position: absolute;
         top: 0; left: 0; right: 0; bottom: 0;
-        background: rgba(0, 0, 0, 0.6);
+        background: rgba(0, 0, 0, 0.65);
         z-index: 1;
       }
 
@@ -41,97 +69,161 @@
         z-index: 2;
       }
 
-      /* --- Powerpuff Project Icons --- */
-      .project-icon-link {
-        text-decoration: none;
-        color: inherit;
-        display: block;
-        transition: transform 0.3s ease;
-        text-align: center;
-        background: transparent;
+      /* --- PROFILE PICTURE --- */
+      .profile-picture { 
+        position: relative; 
+        width: 300px;
+        max-width: 70vw; 
+        aspect-ratio: 1 / 1; 
+        border-radius: 50%;
+        overflow: hidden;
+        border: 4px solid var(--baby-blue);
+        box-shadow: 0 0 25px var(--baby-blue-glow);
+        animation: glow-baby-blue 2.5s infinite alternate; 
+        margin-bottom: 30px;
+        display: inline-block;
       }
 
-      .char-btn {
-        height: 220px; 
-        width: auto;
-        object-fit: contain;
-        filter: drop-shadow(5px 5px 10px rgba(0,0,0,0.1)); 
-        transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      .profile-picture img { 
+        width: 100%; 
+        height: 100%; 
+        object-fit: cover; 
       }
 
-      .project-icon-link:hover .char-btn {
-        transform: scale(1.15) translateY(-20px);
-        filter: drop-shadow(10px 20px 25px rgba(0,0,0,0.3));
+      @keyframes glow-baby-blue {
+        0% { box-shadow: 0 0 15px var(--baby-blue-glow); }
+        100% { box-shadow: 0 0 45px var(--baby-blue), 0 0 65px var(--baby-blue-glow); }
       }
 
-      .project-title {
-        margin-top: 20px;
-        font-weight: 900;
-        text-transform: uppercase;
-        letter-spacing: 1px;
+      /* --- TYPEWRITER --- */
+      .typewriter-text {
+        overflow: hidden;
+        border-right: .15em solid var(--baby-blue);
+        white-space: nowrap;
+        margin: 0 auto;
+        display: inline-block;
+        animation: typing 3.5s steps(30, end), blink-caret .75s step-end infinite;
       }
 
-      .section-padding {
-        padding: 80px 0;
+      @keyframes typing { from { width: 0 } to { width: 100% } }
+      @keyframes blink-caret { from, to { border-color: transparent } 50% { border-color: var(--baby-blue); } }
+
+      /* --- CARD STYLING & BALANCE --- */
+      .card, .cert-card, .contact-info-card {
+        background-color: #242424 !important; 
+        color: #e0e0e0 !important; 
+        border: 1px solid rgba(255,255,255,0.05) !important; 
+        border-radius: 20px;
+        transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275), box-shadow 0.4s ease !important;
       }
 
-      /* --- Certification Hover Effects --- */
-      .cert-card {
-        cursor: pointer;
-        transition: all 0.3s ease-in-out;
-        border: none;
+      /* FIX FOR CONTACT TEXT COLOR */
+      .contact-info-card h5 {
+        color: #ffffff !important;
+        font-weight: bold;
+      }
+
+      .contact-info-card p {
+        color: var(--baby-blue) !important;
+      }
+
+      .card:hover, .cert-card:hover, .contact-info-card:hover {
+        transform: translateY(-12px) scale(1.02) !important;
+        box-shadow: 0 20px 40px rgba(0, 0, 0, 0.6) !important;
+        border-color: var(--baby-blue) !important;
+      }
+
+      .cert-img-wrapper {
+        width: 100%;
+        aspect-ratio: 4 / 3;
+        overflow: hidden;
         border-radius: 12px;
-        overflow: hidden;
+        background: #1a1a1a;
       }
 
-      .cert-card:hover {
-        transform: translateY(-10px);
-        box-shadow: 0 15px 30px rgba(0,0,0,0.15) !important;
-      }
-
-      .cert-img-container {
-        position: relative;
-        overflow: hidden;
-        border-radius: 8px;
-        height: 300px; /* Adjust height as needed */
-      }
-
-      .cert-img {
+      .cert-img-wrapper img {
         width: 100%;
         height: 100%;
         object-fit: cover;
-        transition: transform 0.5s ease;
       }
 
-      .cert-card:hover .cert-img {
-        transform: scale(1.1);
+      /* --- PROJECTS --- */
+      .project-icon-link {
+        text-decoration: none;
+        display: block;
+        transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
       }
 
-      /* Hover Overlay with Zoom Icon */
-      .cert-overlay {
-        position: absolute;
-        top: 0; left: 0; width: 100%; height: 100%;
-        background: rgba(0, 0, 0, 0.4);
-        opacity: 0;
-        transition: opacity 0.3s ease;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        color: white;
-        font-size: 2.5rem;
+      .project-icon-link:hover {
+        transform: translateY(-20px) scale(1.1);
       }
 
-      .cert-card:hover .cert-overlay {
-        opacity: 1;
+      .char-btn {
+        height: 220px;
+        width: auto;
+        margin-bottom: 15px;
+        filter: drop-shadow(0 10px 15px rgba(0,0,0,0.5));
       }
 
+      /* --- BUTTONS & MODALS --- */
+      .btn-baby-blue {
+        background: transparent;
+        color: var(--baby-blue);
+        border: 2px solid var(--baby-blue);
+        border-radius: 30px;
+        padding: 12px 35px;
+        font-weight: bold;
+        transition: 0.3s;
+        text-decoration: none;
+        display: inline-block;
+      }
+
+      .btn-baby-blue:hover {
+        background: var(--baby-blue);
+        color: #1a1a1a;
+        box-shadow: 0 0 20px var(--baby-blue);
+      }
+
+      .modal-content {
+        background-color: rgba(20, 20, 20, 0.98);
+        border: 2px solid var(--baby-blue);
+        border-radius: 25px;
+      }
+
+      .section-padding { padding: 100px 0; }
+      #services, #education, #contact { background-color: #1a1a1a; }
+      #certifications, #projects { background-color: #1e1e1e; }
+      .text-primary { color: var(--baby-blue) !important; }
+
+      .form-control:focus {
+        background-color: #242424 !important;
+        border-color: var(--baby-blue) !important;
+        box-shadow: 0 0 10px var(--baby-blue-glow) !important;
+        color: white !important;
+      }
+
+      /* --- SOCIAL ICONS HOVER --- */
+      .social-link {
+        transition: transform 0.3s ease, color 0.3s ease;
+        display: inline-block;
+      }
+      .social-link:hover {
+        transform: scale(1.2);
+        color: white !important;
+      }
+
+      @media (max-width: 768px) {
+        #home { padding: 150px 0 80px 0; }
+        .typewriter-text { font-size: 1.1rem; white-space: normal; border-right: none; animation: none; }
+        .char-btn { height: 160px; }
+      }
     </style>
   </head>
   <body>
 
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top shadow">
+    <nav class="navbar navbar-expand-lg navbar-dark fixed-top">
       <div class="container">
-        <a class="navbar-brand fw-bold" href="#">DANSOYPORTFOLIO</a>
+        <a class="navbar-brand fw-bold" href="#" style="color: var(--baby-blue); letter-spacing: 2px;">DANSOYPORTFOLIO</a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
           <span class="navbar-toggler-icon"></span>
         </button>
@@ -149,184 +241,199 @@
     </nav>
 
     <section id="home">
-      <div class="container">
-        <div class="row">
-          <div class="col-md-8 text-start">
-            <img src="images/source.gif" 
-                 class="img-fluid mb-4 rounded-circle shadow" 
-                 style="max-width:150px; border: 3px solid white;" 
-                 alt="Profile">
-            <h1 class="display-3 fw-bold">Hi, I'm Dansoy</h1>
-            <p class="lead fs-3">A vermin with a keyboard</p>
-            <a href="#projects" class="btn btn-light btn-lg mt-3 px-4 shadow-sm">View My Work</a>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section id="services" class="py-5">
       <div class="container text-center">
-        <h2 class="mb-5 fw-bold text-start">My Services</h2>
-        <div class="row g-4 text-start">
+        <div class="profile-picture">
+          <img src="images/source.gif" alt="Profile">
+        </div>
+        <h1 class="display-3 fw-bold">Hi, I'm <span style="color: var(--baby-blue);">Dansoy</span></h1>
+        <p class="lead fs-3 typewriter-text">A vermin with a keyboard</p>
+        <br>
+        <a href="#projects" class="btn btn-baby-blue btn-lg mt-3">View My Work</a>
+      </div>
+    </section>
+
+    <section id="services" class="section-padding">
+      <div class="container text-center">
+        <h2 class="mb-5 fw-bold">My Services</h2>
+        <div class="row g-4 justify-content-center">
           <div class="col-md-4">
-            <div class="card p-4 h-100 border-0 shadow-sm">
-              <h4 class="text-primary"><i class="bi bi-layout-text-window-reverse"></i> Web Design</h4>
-              <p>Simple and clean website designs focused on user experience.</p>
+            <div class="card p-5 h-100">
+              <h4 class="text-primary mb-3"><i class="bi bi-layout-text-window-reverse"></i> Web Design</h4>
+              <p class="text-muted">Simple and clean website designs focused on user experience.</p>
             </div>
           </div>
           <div class="col-md-4">
-            <div class="card p-4 h-100 border-0 shadow-sm">
-              <h4 class="text-primary"><i class="bi bi-code-slash"></i> Frontend Development</h4>
-              <p>Responsive and mobile-friendly layouts using Bootstrap 5.</p>
+            <div class="card p-5 h-100">
+              <h4 class="text-primary mb-3"><i class="bi bi-code-slash"></i> Frontend Development</h4>
+              <p class="text-muted">Responsive and mobile-friendly layouts using Bootstrap 5.</p>
             </div>
           </div>
           <div class="col-md-4">
-            <div class="card p-4 h-100 border-0 shadow-sm">
-              <h4 class="text-primary"><i class="bi bi-mortarboard"></i> Student Projects</h4>
-              <p>Helping peers with beginner-friendly coding and web projects.</p>
+            <div class="card p-5 h-100">
+              <h4 class="text-primary mb-3"><i class="bi bi-mortarboard"></i> Student Projects</h4>
+              <p class="text-muted">Helping peers with beginner-friendly coding and web projects.</p>
             </div>
           </div>
         </div>
       </div>
     </section>
 
-    <section id="certifications" class="section-padding bg-light">
-        <div class="container">
-            <h2 class="text-center mb-5 fw-bold">Certifications</h2>
-            <div class="row">
-                <div class="col-md-6 mb-4">
-                    <div class="card cert-card p-3 shadow-sm text-center" data-bs-toggle="modal" data-bs-target="#certModal1">
-                        <div class="cert-img-container">
-                            <img src="images/CERTIFICATE.png" class="cert-img" alt="Fundamentals in Java">
-                            <div class="cert-overlay">
-                                <i class="bi bi-zoom-in"></i>
-                            </div>
+    <section id="certifications" class="section-padding">
+        <div class="container text-center">
+            <h2 class="mb-5 fw-bold">Certifications</h2>
+            <div class="row justify-content-center g-4">
+                <div class="col-md-5 d-flex align-items-stretch">
+                    <div class="card cert-card p-4 shadow-sm w-100 d-flex flex-column" data-bs-toggle="modal" data-bs-target="#cert1Modal" style="cursor: pointer;">
+                        <div class="cert-img-wrapper mb-3">
+                            <img src="images/CERTIFICATE.png" alt="Java Certificate">
                         </div>
-                        <h5 class="mt-3 fw-bold">Fundamentals in Java</h5>
-                        <p class="text-muted">Web Development Basics</p>
+                        <h5 class="fw-bold mt-2">Fundamentals in Java</h5>
+                        <p class="text-muted small mt-auto">Click to view full certificate</p>
                     </div>
                 </div>
-
-                <div class="col-md-6 mb-4">
-                    <div class="card cert-card p-3 shadow-sm text-center" data-bs-toggle="modal" data-bs-target="#certModal2">
-                        <div class="cert-img-container">
-                            <img src="images/CERTIFICATE2.png" class="cert-img" alt="Python">
-                            <div class="cert-overlay">
-                                <i class="bi bi-zoom-in"></i>
-                            </div>
+                <div class="col-md-5 d-flex align-items-stretch">
+                    <div class="card cert-card p-4 shadow-sm w-100 d-flex flex-column" data-bs-toggle="modal" data-bs-target="#cert2Modal" style="cursor: pointer;">
+                        <div class="cert-img-wrapper mb-3">
+                            <img src="images/CERTIFICATE2.png" alt="Python Certificate">
                         </div>
-                        <h5 class="mt-3 fw-bold">Python</h5>
-                        <p class="text-muted">IT Fundamentals</p>
+                        <h5 class="fw-bold mt-2">Python Programming</h5>
+                        <p class="text-muted small mt-auto">Click to view full certificate</p>
                     </div>
                 </div>
             </div>
         </div>
     </section>
+
+    <div class="modal fade" id="cert1Modal" tabindex="-1" aria-hidden="true">
+      <div class="modal-dialog modal-lg modal-dialog-centered">
+        <div class="modal-content">
+          <div class="modal-body p-2 text-center">
+            <img src="images/CERTIFICATE.png" class="img-fluid rounded-4" alt="Java Certificate Large">
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="modal fade" id="cert2Modal" tabindex="-1" aria-hidden="true">
+      <div class="modal-dialog modal-lg modal-dialog-centered">
+        <div class="modal-content">
+          <div class="modal-body p-2 text-center">
+            <img src="images/CERTIFICATE2.png" class="img-fluid rounded-4" alt="Python Certificate Large">
+          </div>
+        </div>
+      </div>
+    </div>
 
     <section id="education" class="section-padding">
-        <div class="container">
-            <h2 class="text-center mb-5 fw-bold">Education</h2>
+        <div class="container text-center">
+            <h2 class="mb-5 fw-bold">Education</h2>
             <div class="row justify-content-center">
                 <div class="col-md-8">
-                    <div class="card p-4 border-0 shadow-sm">
+                    <div class="card p-5">
                         <h4 class="text-primary fw-bold">Bachelor of Science in Information Technology</h4>
-                        <p class="mb-1"><strong>University of Mindanao | College of Computing Education</strong></p>
+                        <p class="mb-1"><strong>University of Mindanao</strong></p>
                         <p class="text-muted">2024 – Present</p>
-                        <p class="mb-0">
-                            Focused on web development, programming fundamentals,
-                            and information security concepts.
-                        </p>
                     </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <section id="projects" class="py-5 bg-light">
-      <div class="container">
-        <h2 class="text-start mb-5 fw-bold">My Projects</h2>
+    <section id="projects" class="section-padding">
+      <div class="container text-center">
+        <h2 class="mb-5 fw-bold">My Projects</h2>
         <div class="row g-5 justify-content-center">
           <div class="col-md-4">
             <a href="https://github.com/Daniel-Jhon-Capuno/Capuno-Login_Dashboard-IT9" target="_blank" class="project-icon-link">
-              <img src="images/bubbles.png" class="char-btn" alt="Login System">
-              <div class="project-title">Login System</div>
-              <p class="project-desc">A simple login page and dashboard project.</p>
+              <img src="images/bubbles.png" class="char-btn" alt="Bubbles">
+              <div class="fw-bold text-white fs-5">Login System</div>
             </a>
           </div>
           <div class="col-md-4">
             <a href="https://github.com/Daniel-Jhon-Capuno/Archivia-SHS-Registration-System" target="_blank" class="project-icon-link">
-              <img src="images/BC.png" class="char-btn" alt="Registration System">
-              <div class="project-title">Archivia SHS</div>
-              <p class="project-desc">A comprehensive registration system for SHS.</p>
+              <img src="images/BC.png" class="char-btn" alt="Buttercup">
+              <div class="fw-bold text-white fs-5">Archivia SHS</div>
             </a>
           </div>
           <div class="col-md-4">
             <a href="https://github.com/Daniel-Jhon-Capuno/Capuno_Biography_" target="_blank" class="project-icon-link">
-              <img src="images/Blossom.png" class="char-btn" alt="Biography">
-              <div class="project-title">Biography Page</div>
-              <p class="project-desc">A personal biography project showcasing web styling.</p>
+              <img src="images/Blossom.png" class="char-btn" alt="Blossom">
+              <div class="fw-bold text-white fs-5">Biography Page</div>
             </a>
           </div>
         </div>
       </div>
     </section>
 
-    <section id="contact" class="py-5">
+    <section id="contact" class="section-padding">
       <div class="container">
-        <h2 class="text-start mb-5 fw-bold">Contact Me</h2>
-        <div class="row">
-          <div class="col-md-6">
-            <form class="bg-light p-4 rounded shadow-sm">
+        <h2 class="mb-5 fw-bold text-center">Contact Me</h2>
+        <div class="row g-5">
+          <div class="col-lg-5">
+            <div class="row g-4">
+              <div class="col-12">
+                <div class="contact-info-card p-4 text-center">
+                  <i class="bi bi-envelope-at" style="font-size: 2rem; color: var(--baby-blue);"></i>
+                  <h5>Email Me</h5>
+                  <p class="mb-0">danieljhoncapuno@gmail.com</p>
+                </div>
+              </div>
+              <div class="col-12">
+                <div class="contact-info-card p-4 text-center">
+                  <i class="bi bi-geo-alt" style="font-size: 2rem; color: var(--baby-blue);"></i>
+                  <h5>Location</h5>
+                  <p class="mb-0">Tagum City, Philippines</p>
+                </div>
+              </div>
+              <div class="col-12">
+                <div class="contact-info-card p-4 text-center">
+                  <i class="bi bi-share" style="font-size: 2rem; color: var(--baby-blue);"></i>
+                  <h5>Socials</h5>
+                  <div class="d-flex justify-content-center gap-4 mt-2">
+                    <a href="YOUR_FACEBOOK_URL" target="_blank" class="text-primary fs-3 social-link"><i class="bi bi-facebook"></i></a>
+                    <a href="YOUR_GITHUB_URL" target="_blank" class="text-primary fs-3 social-link"><i class="bi bi-github"></i></a>
+                    <a href="YOUR_TWITTER_URL" target="_blank" class="text-primary fs-3 social-link"><i class="bi bi-twitter-x"></i></a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          
+          <div class="col-lg-7">
+            <form class="p-5 rounded-4 bg-dark border border-secondary shadow-lg">
               <div class="mb-3">
-                <input type="text" class="form-control" placeholder="Name" required>
+                <label class="form-label text-white small fw-bold">Input name:</label>
+                <input type="text" class="form-control bg-dark text-white border-secondary py-3" placeholder="Input name:">
               </div>
               <div class="mb-3">
-                <input type="email" class="form-control" placeholder="Email" required>
+                <label class="form-label text-white small fw-bold">Email:</label>
+                <input type="email" class="form-control bg-dark text-white border-secondary py-3" placeholder="Email:">
               </div>
-              <div class="mb-3">
-                <textarea class="form-control" rows="4" placeholder="Message" required></textarea>
+              <div class="mb-4">
+                <label class="form-label text-white small fw-bold">Message:</label>
+                <textarea class="form-control bg-dark text-white border-secondary" rows="5" placeholder="Message:"></textarea>
               </div>
-              <button type="submit" class="btn btn-primary w-100 py-2">Send Message</button>
+              <button type="submit" class="btn btn-baby-blue w-100 py-3">SEND MESSAGE</button>
             </form>
           </div>
         </div>
       </div>
     </section>
 
-    <footer class="text-center py-4 bg-dark text-white">
-        <div class="container">
-            <div class="mb-3">
-                <a href="#" class="text-white me-3 fs-4"><i class="bi bi-facebook"></i></a>
-                <a href="#" class="text-white me-3 fs-4"><i class="bi bi-github"></i></a>
-                <a href="#" class="text-white me-3 fs-4"><i class="bi bi-linkedin"></i></a>
-                <a href="#" class="text-white fs-4"><i class="bi bi-envelope-fill"></i></a>
-            </div>
-            <p class="mb-0">© 2026 Daniel Jhon Capuno | All Rights Reserved</p>
-        </div>
+    <footer class="text-center py-5 bg-dark">
+        <p>© 2026 Daniel Jhon Capuno | All Rights Reserved</p>
     </footer>
 
-    <div class="modal fade" id="certModal1" tabindex="-1" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered modal-lg">
-            <div class="modal-content bg-transparent border-0">
-                <div class="modal-body p-0 text-center position-relative">
-                    <button type="button" class="btn-close btn-close-white position-absolute top-0 end-0 m-3" data-bs-dismiss="modal" aria-label="Close"></button>
-                    <img src="images/CERTIFICATE.png" class="img-fluid rounded shadow-lg" alt="Certificate Full">
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <div class="modal fade" id="certModal2" tabindex="-1" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered modal-lg">
-            <div class="modal-content bg-transparent border-0">
-                <div class="modal-body p-0 text-center position-relative">
-                    <button type="button" class="btn-close btn-close-white position-absolute top-0 end-0 m-3" data-bs-dismiss="modal" aria-label="Close"></button>
-                    <img src="images/CERTIFICATE2.png" class="img-fluid rounded shadow-lg" alt="Certificate Full">
-                </div>
-            </div>
-        </div>
-    </div>
-
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://unpkg.com/lenis@1.0.42/dist/lenis.min.js"></script>
+
+    <script>
+      const lenis = new Lenis();
+      function raf(time) {
+        lenis.raf(time);
+        requestAnimationFrame(raf);
+      }
+      requestAnimationFrame(raf);
+    </script>
   </body>
 </html>
