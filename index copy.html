@@ -58,87 +58,72 @@
       /* --- SCROLL PROGRESS BAR --- */
       .scroll-progress {
         position: fixed;
-          max-width: 640px;
+        top: 0;
         left: 0;
         width: 0%;
         height: 4px;
         background: linear-gradient(90deg, var(--accent-sepia), var(--accent-wine), var(--accent-royal));
         z-index: 9999;
-          gap: 0.4rem;
         box-shadow: 0 0 10px rgba(176, 122, 63, 0.35);
       }
-        .education-stamp .education-header {
+
       /* --- LITERARY NAVBAR --- */
       .navbar {
         background: rgba(18, 14, 11, 0.58) !important;
-          margin: 0 auto 0.25rem;
         -webkit-backdrop-filter: blur(12px);
+        backdrop-filter: blur(12px);
         border-bottom: none !important;
         padding: 18px 0;
         z-index: 1000;
-          font-family: 'Cormorant Garamond', serif;
-          font-size: 0.95rem;
+      }
 
-          letter-spacing: 0.12em;
+      .nav-link {
+        font-family: 'Cormorant Garamond', serif;
+        font-size: 0.95rem;
+        letter-spacing: 0.12em;
         color: rgba(242, 232, 217, 0.82) !important;
         font-weight: 500;
         transition: 0.3s;
-        .education-stamp .education-course {
-          margin: 0;
-          font-size: 1.8rem;
+      }
 
       .nav-link:hover {
-          font-weight: 700;
-          line-height: 1.08;
-          letter-spacing: 0.01em;
         color: var(--accent-sepia) !important;
       }
-        .education-stamp .education-school,
-        .education-stamp .education-quote,
-        .education-stamp .education-date {
-          margin: 0;
-          font-family: 'Cormorant Garamond', serif;
-          color: #2b241d !important;
+
+      #home {
         min-height: 100vh;
         display: flex;
-        .education-stamp .education-school {
-          font-size: 1.18rem;
-          font-weight: 600;
-          line-height: 1.22;
+        align-items: center;
+        position: relative;
+        overflow: hidden;
+        padding-top: 120px;
+      }
+
+      .video-background {
         position: absolute;
         top: 0;
-        .education-stamp .education-quote {
-          font-size: 1.05rem;
-          font-style: italic;
-          line-height: 1.35;
-          max-width: 44ch;
-          color: rgba(43, 36, 29, 0.82) !important;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 100%;
+        height: 100%;
+        z-index: 0;
+        overflow: hidden;
+      }
+
+      .video-background::after {
+        content: '';
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(180deg, rgba(16,13,11,0.55), rgba(16,13,11,0.88));
+      }
 
       #home .video-background video {
-        .education-stamp .education-date {
-          margin-top: 0.08rem;
-          color: rgba(43, 36, 29, 0.64) !important;
-        left: 50%;
-          font-size: 0.92rem;
-          letter-spacing: 0.08em;
-          text-transform: uppercase;
+        width: 100%;
+        height: 100%;
         object-fit: cover;
       }
-      }
 
-            max-width: 92vw;
-          }
-
-          .education-stamp .education-course {
-            font-size: 1.56rem;
-          }
-
-          .education-stamp .education-school {
-            font-size: 1.08rem;
-          }
-
-          .education-stamp .education-quote {
-            font-size: 0.98rem;
+      #home .container {
         position: relative;
         z-index: 2;
       }
@@ -279,20 +264,22 @@
 
       /* --- SCROLL ANIMATIONS --- */
       .scroll-animate {
-        opacity: 1;
-        transform: translateY(0);
-        transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+        opacity: 0;
+        transform: translateY(38px) scale(0.98);
+        transition: opacity 0.85s cubic-bezier(0.16, 1, 0.3, 1), transform 0.85s cubic-bezier(0.16, 1, 0.3, 1);
+        will-change: opacity, transform;
       }
 
       .scroll-animate.visible {
         opacity: 1;
-        transform: translateY(0);
+        transform: translateY(0) scale(1);
       }
 
       .scroll-animate-left {
-        opacity: 1;
-        transform: translateX(0);
-        transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+        opacity: 0;
+        transform: translateX(-48px);
+        transition: opacity 0.85s cubic-bezier(0.16, 1, 0.3, 1), transform 0.85s cubic-bezier(0.16, 1, 0.3, 1);
+        will-change: opacity, transform;
       }
 
       .scroll-animate-left.visible {
@@ -301,9 +288,10 @@
       }
 
       .scroll-animate-right {
-        opacity: 1;
-        transform: translateX(0);
-        transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+        opacity: 0;
+        transform: translateX(48px);
+        transition: opacity 0.85s cubic-bezier(0.16, 1, 0.3, 1), transform 0.85s cubic-bezier(0.16, 1, 0.3, 1);
+        will-change: opacity, transform;
       }
 
       .scroll-animate-right.visible {
@@ -312,10 +300,18 @@
       }
 
       /* Staggered animation delays */
-      .scroll-animate:nth-child(1) { transition-delay: 0.1s; }
-      .scroll-animate:nth-child(2) { transition-delay: 0.2s; }
-      .scroll-animate:nth-child(3) { transition-delay: 0.3s; }
-      .scroll-animate:nth-child(4) { transition-delay: 0.4s; }
+      .scroll-animate:nth-child(1) { transition-delay: 0.08s; }
+      .scroll-animate:nth-child(2) { transition-delay: 0.16s; }
+      .scroll-animate:nth-child(3) { transition-delay: 0.24s; }
+      .scroll-animate:nth-child(4) { transition-delay: 0.32s; }
+
+      @media (prefers-reduced-motion: reduce) {
+        .scroll-animate, .scroll-animate-left, .scroll-animate-right {
+          opacity: 1 !important;
+          transform: none !important;
+          transition: none !important;
+        }
+      }
 
       /* --- CARD STYLING & BALANCE --- */
       .card, .cert-card, .contact-info-card {
@@ -330,11 +326,16 @@
       /* FIX FOR CONTACT TEXT COLOR */
       .contact-info-card h5 {
         color: var(--accent-wine) !important;
-        font-weight: bold;
+        font-family: 'Fraunces', serif;
+        font-weight: 800;
+        font-size: 1.3rem;
+        letter-spacing: 0.01em;
       }
 
       .contact-info-card p {
-        color: var(--accent-royal) !important;
+        color: #3a3024 !important;
+        font-weight: 600;
+        font-size: 1.05rem;
       }
 
       .card:hover, .cert-card:hover, .contact-info-card:hover {
@@ -466,88 +467,140 @@
         mix-blend-mode: screen;
       }
 
-      .education-stamp {
-        max-width: 760px;
+      /* --- EDUCATION: POSTMARK STAMPS --- */
+      .education-grid {
+        max-width: 920px;
         margin: 0 auto;
-        text-align: center;
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 2rem;
+      }
+
+      .education-stamp {
+        --edu-accent: var(--accent-royal);
+        --edu-accent-soft: rgba(81, 105, 143, 0.14);
         display: flex;
         flex-direction: column;
         align-items: center;
-        gap: 0.55rem;
+        text-align: center;
+        gap: 0.65rem;
+        padding: 2.5rem 1.8rem 2.1rem;
+        height: 100%;
       }
 
-      .education-stamp .education-kicker {
+      .education-stamp.education-stamp-pwc {
+        --edu-accent: var(--accent-wine);
+        --edu-accent-soft: rgba(142, 61, 77, 0.14);
+      }
+
+      .education-postmark {
+        position: relative;
+        width: 88px;
+        height: 88px;
+        border-radius: 50%;
+        border: 2px solid var(--edu-accent);
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        color: var(--edu-accent);
+        margin-bottom: 0.25rem;
+        background: radial-gradient(circle at 35% 30%, rgba(255,255,255,0.6), transparent 55%);
+      }
+
+      .education-postmark::before {
+        content: '';
+        position: absolute;
+        inset: 7px;
+        border: 1px dashed var(--edu-accent);
+        border-radius: 50%;
+        opacity: 0.55;
+      }
+
+      .education-postmark-code {
+        font-family: 'Fraunces', serif;
+        font-weight: 800;
+        font-size: 1.05rem;
+        letter-spacing: 0.04em;
+        line-height: 1;
+      }
+
+      .education-postmark-status {
+        font-family: 'Inter', sans-serif;
+        font-size: 0.52rem;
+        font-weight: 700;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+        margin-top: 3px;
+      }
+
+      .education-kicker {
         display: inline-flex;
         align-items: center;
         justify-content: center;
-        margin: 0 auto 0.2rem;
-        padding: 0.35rem 0.8rem;
+        padding: 0.32rem 0.85rem;
         border-radius: 999px;
-        background: rgba(176, 122, 63, 0.12);
-        color: var(--accent-wine) !important;
+        background: var(--edu-accent-soft);
+        color: var(--edu-accent) !important;
         font-family: 'Inter', sans-serif;
-        font-size: 0.72rem;
+        font-size: 0.68rem;
         font-weight: 700;
-        letter-spacing: 0.15em;
+        letter-spacing: 0.14em;
         text-transform: uppercase;
       }
 
-      .education-stamp h4 {
-        margin-bottom: 0;
-        font-size: 1.9rem;
-        line-height: 1.05;
-        font-family: 'Cormorant Garamond', serif;
-        color: #2b241d !important;
+      .education-school {
+        margin: 0;
+        font-family: 'Fraunces', serif;
         font-weight: 700;
-      }
-
-      .education-stamp .education-main {
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        width: 100%;
-        padding: 0.25rem 0 0.2rem;
-      }
-
-      .education-stamp .education-secondary {
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        width: 100%;
-        padding: 0.2rem 0 0.15rem;
-      }
-
-      .education-stamp .education-school {
-        margin-bottom: 0;
+        font-size: 1.32rem;
+        line-height: 1.22;
         color: #2b241d !important;
-        font-family: 'Cormorant Garamond', serif;
-        font-size: 1.18rem;
-        line-height: 1.25;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        min-height: 2.45em;
       }
 
-      .education-stamp .education-note {
-        color: rgba(43, 36, 29, 0.72) !important;
+      .education-course {
+        margin: 0;
         font-family: 'Cormorant Garamond', serif;
-        font-size: 1.1rem;
+        font-weight: 600;
+        font-size: 1.05rem;
+        color: var(--edu-accent) !important;
+      }
+
+      .education-quote {
+        margin: 0.2rem 0 0;
+        font-family: 'Cormorant Garamond', serif;
         font-style: italic;
-        line-height: 1.35;
-        max-width: 46ch;
-        margin: 0 auto;
+        font-size: 1rem;
+        line-height: 1.42;
+        max-width: 30ch;
+        color: rgba(43, 36, 29, 0.78) !important;
+        flex-grow: 1;
+        display: flex;
+        align-items: center;
+        justify-content: center;
       }
 
-      .education-stamp .education-year {
-        margin-top: 0.15rem;
-        color: rgba(43, 36, 29, 0.64) !important;
-        font-family: 'Cormorant Garamond', serif;
-        font-size: 0.9rem;
-        letter-spacing: 0.08em;
+      .education-date {
+        margin-top: auto;
+        padding: 0.4rem 1.1rem;
+        border-top: 1px dashed rgba(43, 36, 29, 0.35);
+        border-bottom: 1px dashed rgba(43, 36, 29, 0.35);
+        font-family: 'Inter', sans-serif;
+        font-size: 0.78rem;
+        font-weight: 600;
+        letter-spacing: 0.12em;
         text-transform: uppercase;
+        color: rgba(43, 36, 29, 0.66) !important;
       }
 
       @media (max-width: 768px) {
-        .education-stamp {
-          align-items: center;
-        }
+        .education-grid { gap: 1.5rem; }
+        .education-school { font-size: 1.22rem; }
+        .education-quote { font-size: 0.92rem; max-width: 28ch; }
       }
 
       .stamp-card:hover {
@@ -712,7 +765,7 @@
         border-radius: 25px;
       }
 
-      /* --- BACK TO TOP BUTTON --- */
+      /* --- BACK TO TOP: CANDLE --- */
       .back-to-top {
         position: fixed;
         bottom: 30px;
@@ -720,18 +773,14 @@
         width: 50px;
         height: 50px;
         background: var(--accent-sepia);
-        color: #120f0c;
         border-radius: 50%;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        font-size: 1.5rem;
         cursor: pointer;
         opacity: 0;
         visibility: hidden;
-        transition: all 0.3s;
+        transition: opacity 0.3s, visibility 0.3s, transform 0.3s, box-shadow 0.3s;
         z-index: 999;
         box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+        overflow: visible;
       }
 
       .back-to-top.visible {
@@ -742,6 +791,246 @@
       .back-to-top:hover {
         transform: translateY(-5px);
         box-shadow: 0 10px 25px rgba(176, 122, 63, 0.35);
+      }
+
+      .back-to-top.is-extinguishing,
+      .back-to-top.is-burning-active {
+        pointer-events: none;
+      }
+
+      .candle-stick {
+        position: absolute;
+        bottom: 9px;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 9px;
+        height: 20px;
+        background: linear-gradient(180deg, #f4ead9, #d8c6a0);
+        border-radius: 2px 2px 1px 1px;
+        box-shadow: inset -2px 0 3px rgba(0,0,0,0.18);
+      }
+
+      .candle-wick {
+        position: absolute;
+        bottom: 27px;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 2px;
+        height: 6px;
+        background: #2b2118;
+        border-radius: 1px;
+      }
+
+      .candle-flame {
+        position: absolute;
+        bottom: 31px;
+        left: 50%;
+        width: 9px;
+        height: 15px;
+        border-radius: 50% 50% 50% 50% / 65% 65% 35% 35%;
+        background: radial-gradient(circle at 50% 72%, #fff6d8 0%, #ffd35c 38%, #ff8a3d 72%, #d44a1d 100%);
+        filter: drop-shadow(0 0 6px rgba(255, 170, 60, 0.65));
+        transform-origin: bottom center;
+        transform: translateX(-50%) scale(1);
+        animation: flame-flicker 1.6s ease-in-out infinite;
+      }
+
+      @keyframes flame-flicker {
+        0%, 100% { transform: translateX(-50%) scale(1) skewX(0deg); }
+        25%      { transform: translateX(-50%) scale(1.05, 0.95) skewX(-3deg); }
+        50%      { transform: translateX(-50%) scale(0.95, 1.05) skewX(2deg); }
+        75%      { transform: translateX(-50%) scale(1.02, 0.97) skewX(-1deg); }
+      }
+
+      .back-to-top.is-extinguishing .candle-flame {
+        animation: flame-out 0.45s ease forwards;
+      }
+
+      @keyframes flame-out {
+        0%   { transform: translateX(-50%) scale(1); opacity: 1; }
+        60%  { transform: translateX(-50%) scale(1.3, 0.4) skewX(8deg); opacity: 0.8; }
+        100% { transform: translateX(-50%) scale(0.1, 0.1); opacity: 0; }
+      }
+
+      .back-to-top.is-relighting .candle-flame {
+        animation: flame-relight 0.5s ease forwards;
+      }
+
+      @keyframes flame-relight {
+        0%   { transform: translateX(-50%) scale(0); opacity: 0; }
+        60%  { transform: translateX(-50%) scale(1.15, 0.85); opacity: 1; }
+        100% { transform: translateX(-50%) scale(1); opacity: 1; }
+      }
+
+      .candle-smoke {
+        position: absolute;
+        bottom: 34px;
+        left: 50%;
+        width: 4px;
+        height: 4px;
+        border-radius: 50%;
+        background: rgba(205, 205, 205, 0.55);
+        filter: blur(1px);
+        opacity: 0;
+        pointer-events: none;
+      }
+
+      .back-to-top.is-extinguishing .candle-smoke {
+        animation: smoke-rise 1.1s ease-out forwards;
+      }
+
+      .candle-smoke:nth-child(4) { --dx: -7px; animation-delay: 0.05s; }
+      .candle-smoke:nth-child(5) { --dx: 5px;  animation-delay: 0.16s; }
+      .candle-smoke:nth-child(6) { --dx: -3px; animation-delay: 0.3s; }
+
+      @keyframes smoke-rise {
+        0%   { transform: translate(-50%, 0) scale(0.6); opacity: 0; }
+        15%  { opacity: 0.55; }
+        100% { transform: translate(calc(-50% + var(--dx)), -48px) scale(1.7); opacity: 0; }
+      }
+
+      @media (prefers-reduced-motion: reduce) {
+        .candle-flame { animation: none; }
+        .back-to-top.is-extinguishing .candle-flame,
+        .back-to-top.is-relighting .candle-flame,
+        .back-to-top.is-extinguishing .candle-smoke {
+          animation: none !important;
+        }
+      }
+
+      /* --- BURN PAGE TRANSITION --- */
+      .burn-overlay {
+        position: fixed;
+        inset: 0;
+        z-index: 99998;
+        pointer-events: none;
+        clip-path: polygon(0% 100%, 0% 100%, 12.5% 100%, 25% 100%, 37.5% 100%, 50% 100%, 62.5% 100%, 75% 100%, 87.5% 100%, 100% 100%, 100% 100%);
+        background: linear-gradient(to top,
+          #0a0705 0%, #140d09 76%,
+          rgba(255, 138, 46, 0.85) 88%,
+          rgba(255, 196, 90, 0.95) 93%,
+          rgba(255, 196, 90, 0) 100%);
+      }
+
+      .burn-overlay.is-burning {
+        animation: burn-wipe 1.05s cubic-bezier(0.61, 0.04, 0.41, 0.95) forwards;
+      }
+
+      @keyframes burn-wipe {
+        0% {
+          clip-path: polygon(0% 100%, 0% 100%, 12.5% 100%, 25% 100%, 37.5% 100%, 50% 100%, 62.5% 100%, 75% 100%, 87.5% 100%, 100% 100%, 100% 100%);
+        }
+        22% {
+          clip-path: polygon(0% 100%, 0% 86%, 12.5% 93%, 25% 79%, 37.5% 90%, 50% 75%, 62.5% 88%, 75% 81%, 87.5% 95%, 100% 84%, 100% 100%);
+        }
+        48% {
+          clip-path: polygon(0% 100%, 0% 53%, 12.5% 66%, 25% 37%, 37.5% 59%, 50% 29%, 62.5% 61%, 75% 43%, 87.5% 69%, 100% 47%, 100% 100%);
+        }
+        72% {
+          clip-path: polygon(0% 100%, 0% 19%, 12.5% 29%, 25% 7%, 37.5% 24%, 50% 3%, 62.5% 26%, 75% 13%, 87.5% 31%, 100% 16%, 100% 100%);
+        }
+        100% {
+          clip-path: polygon(0% 100%, 0% 0%, 12.5% 0%, 25% 0%, 37.5% 0%, 50% 0%, 62.5% 0%, 75% 0%, 87.5% 0%, 100% 0%, 100% 100%);
+        }
+      }
+
+      .burn-overlay.is-clearing {
+        animation: burn-clear 0.55s ease forwards;
+      }
+
+      @keyframes burn-clear {
+        0%   { opacity: 1; }
+        100% { opacity: 0; }
+      }
+
+      .ember-wisp {
+        position: absolute;
+        bottom: -10px;
+        width: 3px;
+        height: 3px;
+        border-radius: 50%;
+        background: radial-gradient(circle, #ffd98a, #ff7a2f);
+        opacity: 0;
+        filter: blur(0.5px);
+      }
+
+      .burn-overlay.is-burning .ember-wisp {
+        animation: ember-rise 1.1s ease-out forwards;
+      }
+
+      .ember-wisp:nth-child(1) { left: 28%; animation-delay: 0.05s; }
+      .ember-wisp:nth-child(2) { left: 52%; animation-delay: 0.2s; }
+      .ember-wisp:nth-child(3) { left: 74%; animation-delay: 0.35s; }
+      .ember-wisp:nth-child(4) { left: 14%; animation-delay: 0.28s; }
+      .ember-wisp:nth-child(5) { left: 87%; animation-delay: 0.12s; }
+
+      @keyframes ember-rise {
+        0%   { transform: translateY(0) scale(1); opacity: 0; }
+        20%  { opacity: 1; }
+        100% { transform: translateY(-100vh) scale(0.4); opacity: 0; }
+      }
+
+      /* Ash flecks falling behind the advancing fire line */
+      .ash-fleck {
+        position: absolute;
+        top: 0;
+        width: 3px;
+        height: 6px;
+        background: linear-gradient(180deg, #4a3422, #18100a);
+        border-radius: 1px;
+        opacity: 0;
+        box-shadow: 0 0 3px rgba(255, 150, 60, 0.4);
+      }
+
+      .burn-overlay.is-burning .ash-fleck {
+        animation: ash-fall 1.15s ease-in forwards;
+      }
+
+      .burn-overlay.is-burning .ash-fleck.ash-fleck-alt {
+        animation: ash-fall-alt 1.25s ease-in forwards;
+      }
+
+      @keyframes ash-fall {
+        0%   { opacity: 0; transform: translateY(0) rotate(0deg); }
+        8%   { opacity: 0.9; }
+        100% { opacity: 0; transform: translateY(85px) rotate(150deg); }
+      }
+
+      @keyframes ash-fall-alt {
+        0%   { opacity: 0; transform: translate(0, 0) rotate(0deg); }
+        8%   { opacity: 0.85; }
+        100% { opacity: 0; transform: translate(-16px, 105px) rotate(-135deg); }
+      }
+
+      .ash-fleck:nth-child(6)  { left: 5%;  top: 90%; animation-delay: 0.18s; }
+      .ash-fleck:nth-child(7)  { left: 13%; top: 75%; animation-delay: 0.24s; }
+      .ash-fleck:nth-child(8)  { left: 21%; top: 85%; animation-delay: 0.2s; }
+      .ash-fleck:nth-child(9)  { left: 29%; top: 65%; animation-delay: 0.34s; }
+      .ash-fleck:nth-child(10) { left: 37%; top: 78%; animation-delay: 0.3s; }
+      .ash-fleck:nth-child(11) { left: 45%; top: 55%; animation-delay: 0.44s; }
+      .ash-fleck:nth-child(12) { left: 53%; top: 70%; animation-delay: 0.4s; }
+      .ash-fleck:nth-child(13) { left: 61%; top: 48%; animation-delay: 0.52s; }
+      .ash-fleck:nth-child(14) { left: 69%; top: 60%; animation-delay: 0.48s; }
+      .ash-fleck:nth-child(15) { left: 77%; top: 38%; animation-delay: 0.6s; }
+      .ash-fleck:nth-child(16) { left: 85%; top: 52%; animation-delay: 0.56s; }
+      .ash-fleck:nth-child(17) { left: 93%; top: 30%; animation-delay: 0.68s; }
+      .ash-fleck:nth-child(18) { left: 9%;  top: 32%; animation-delay: 0.74s; }
+      .ash-fleck:nth-child(19) { left: 18%; top: 20%; animation-delay: 0.8s; }
+      .ash-fleck:nth-child(20) { left: 33%; top: 25%; animation-delay: 0.78s; }
+      .ash-fleck:nth-child(21) { left: 48%; top: 15%; animation-delay: 0.86s; }
+      .ash-fleck:nth-child(22) { left: 57%; top: 22%; animation-delay: 0.84s; }
+      .ash-fleck:nth-child(23) { left: 66%; top: 10%; animation-delay: 0.92s; }
+      .ash-fleck:nth-child(24) { left: 75%; top: 18%; animation-delay: 0.9s; }
+      .ash-fleck:nth-child(25) { left: 88%; top: 8%;  animation-delay: 0.98s; }
+      .ash-fleck:nth-child(26) { left: 25%; top: 8%;  animation-delay: 1.0s; }
+      .ash-fleck:nth-child(27) { left: 42%; top: 5%;  animation-delay: 1.04s; }
+
+      @media (prefers-reduced-motion: reduce) {
+        .burn-overlay, .burn-overlay.is-burning, .burn-overlay.is-clearing, .ember-wisp, .ash-fleck {
+          animation: none !important;
+          clip-path: polygon(0% 100%, 0% 100%, 12.5% 100%, 25% 100%, 37.5% 100%, 50% 100%, 62.5% 100%, 75% 100%, 87.5% 100%, 100% 100%, 100% 100%) !important;
+          opacity: 0 !important;
+        }
       }
 
       .section-padding { padding: 100px 0; }
@@ -1072,11 +1361,153 @@
       }
       .text-primary { color: var(--accent-sepia) !important; }
 
-      .form-control:focus {
-        background-color: rgba(28, 22, 18, 0.96) !important;
-        border-color: var(--accent-sepia) !important;
-        box-shadow: 0 0 10px rgba(176, 122, 63, 0.22) !important;
-        color: var(--paper) !important;
+      /* --- CONTACT: ICON BADGES --- */
+      .contact-icon-badge {
+        position: relative;
+        width: 58px;
+        height: 58px;
+        margin: 0 auto 0.9rem;
+        border-radius: 50%;
+        border: none;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: #fff5e8;
+        background: linear-gradient(135deg, var(--accent-sepia), var(--accent-wine));
+        box-shadow: 0 10px 22px rgba(176, 122, 63, 0.4), inset 0 1px 2px rgba(255,255,255,0.35);
+      }
+
+      .contact-icon-badge::before {
+        content: '';
+        position: absolute;
+        inset: 6px;
+        border: 1px dashed rgba(255, 245, 232, 0.6);
+        border-radius: 50%;
+      }
+
+      .contact-icon-badge i {
+        font-size: 1.3rem;
+      }
+
+      /* --- CONTACT: POSTCARD FORM --- */
+      .contact-postcard {
+        position: relative;
+        background: linear-gradient(170deg, #f8f3ea, #efe6d4);
+        border-radius: 18px;
+        padding: 3rem 2.8rem;
+        text-align: left;
+        box-shadow: 0 22px 48px rgba(0,0,0,0.45), inset 0 0 0 1px rgba(255,255,255,0.4);
+        border: 1px solid rgba(122, 92, 61, 0.22);
+        overflow: hidden;
+      }
+
+      .contact-postcard::before {
+        content: '';
+        position: absolute;
+        inset: 0;
+        background-image: repeating-linear-gradient(180deg, transparent, transparent 41px, rgba(122, 92, 61, 0.07) 42px);
+        pointer-events: none;
+      }
+
+      .contact-postcard > * {
+        position: relative;
+        z-index: 1;
+      }
+
+      .contact-postcard-stamp {
+        position: absolute;
+        top: 22px;
+        right: 28px;
+        width: 60px;
+        height: 74px;
+        border: 2px dashed rgba(142, 61, 77, 0.55);
+        border-radius: 6px;
+        background: rgba(176, 122, 63, 0.12);
+        color: var(--accent-wine);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 1.35rem;
+        transform: rotate(6deg);
+      }
+
+      .contact-postcard-label {
+        font-family: 'Caveat', cursive;
+        font-weight: 700;
+        font-size: 1.7rem;
+        color: var(--accent-wine);
+        text-shadow: 0 1px 0 rgba(255,255,255,0.4);
+        margin: 0 0 1.6rem;
+        max-width: 70%;
+      }
+
+      .contact-label {
+        display: block;
+        font-family: 'Inter', sans-serif;
+        font-size: 0.74rem;
+        font-weight: 800;
+        letter-spacing: 0.16em;
+        text-transform: uppercase;
+        color: var(--accent-wine);
+        margin-bottom: 0.45rem;
+      }
+
+      .contact-input {
+        display: block;
+        width: 100%;
+        background: transparent;
+        border: none;
+        border-bottom: 2px solid rgba(43, 36, 29, 0.32);
+        padding: 0.6rem 0.2rem;
+        font-family: 'Cormorant Garamond', serif;
+        font-weight: 600;
+        font-size: 1.2rem;
+        color: #1f1a14;
+        transition: border-color 0.3s, background 0.3s;
+      }
+
+      .contact-input::placeholder {
+        color: rgba(43, 36, 29, 0.4);
+        font-weight: 400;
+        font-style: italic;
+      }
+
+      .contact-input:focus {
+        outline: none;
+        border-bottom-color: var(--accent-wine);
+        background: rgba(176, 122, 63, 0.08);
+      }
+
+      textarea.contact-input {
+        resize: vertical;
+        min-height: 110px;
+      }
+
+      .btn-send {
+        background: linear-gradient(135deg, var(--accent-sepia), var(--accent-wine));
+        color: #fff5e8;
+        border: none;
+        border-radius: 30px;
+        padding: 13px 38px;
+        font-family: 'Inter', sans-serif;
+        font-weight: 700;
+        font-size: 0.92rem;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        box-shadow: 0 12px 26px rgba(142, 61, 77, 0.32), inset 0 1px 1px rgba(255,255,255,0.3);
+        transition: transform 0.25s ease, box-shadow 0.25s ease;
+        cursor: pointer;
+      }
+
+      .btn-send:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 18px 34px rgba(142, 61, 77, 0.42), inset 0 1px 1px rgba(255,255,255,0.3);
+      }
+
+      @media (max-width: 576px) {
+        .contact-postcard { padding: 2.2rem 1.6rem; }
+        .contact-postcard-stamp { width: 50px; height: 62px; top: 16px; right: 18px; font-size: 1.1rem; }
+        .contact-postcard-label { font-size: 1.25rem; max-width: 60%; }
       }
 
       /* --- SOCIAL ICONS HOVER --- */
@@ -1123,9 +1554,182 @@
         .char-btn { height: 160px; }
         .back-to-top { bottom: 20px; right: 20px; width: 45px; height: 45px; }
       }
+
+      /* --- INK LOADING SCREEN --- */
+      body.is-loading {
+        overflow: hidden;
+        height: 100vh;
+      }
+
+      .loading-screen {
+        position: fixed;
+        inset: 0;
+        z-index: 100000;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        background: radial-gradient(circle at 50% 42%, #1d1813 0%, #0c0907 72%);
+        overflow: hidden;
+        clip-path: circle(150% at 50% 42%);
+        transition: clip-path 1.15s cubic-bezier(0.7, 0, 0.3, 1), opacity 0.4s ease 0.9s, visibility 0.4s ease 0.9s;
+      }
+
+      .loading-screen.is-draining {
+        clip-path: circle(0% at 50% 42%);
+      }
+
+      .loading-screen.is-hidden {
+        opacity: 0;
+        visibility: hidden;
+        pointer-events: none;
+      }
+
+      .loading-screen::before {
+        content: '';
+        position: absolute;
+        inset: 0;
+        background-image:
+          linear-gradient(rgba(255,255,255,0.03) 1px, transparent 1px),
+          linear-gradient(90deg, rgba(255,255,255,0.02) 1px, transparent 1px);
+        background-size: 100% 4px, 4px 100%;
+        opacity: 0.06;
+        mix-blend-mode: soft-light;
+        pointer-events: none;
+      }
+
+      .ink-pool {
+        position: absolute;
+        width: 6px;
+        height: 6px;
+        border-radius: 50%;
+        background: radial-gradient(circle, var(--accent-wine) 0%, #170f0a 72%);
+        opacity: 0;
+        z-index: 1;
+        animation: ink-spread 1.9s cubic-bezier(0.22, 0.7, 0.3, 1) 0.85s forwards;
+      }
+
+      @keyframes ink-spread {
+        0% { width: 6px; height: 6px; opacity: 0.95; }
+        100% { width: 1600px; height: 1600px; opacity: 1; }
+      }
+
+      .ink-drop-icon {
+        position: relative;
+        font-size: 2.2rem;
+        color: var(--accent-sepia);
+        z-index: 2;
+        filter: drop-shadow(0 4px 8px rgba(0,0,0,0.45));
+        animation: ink-fall 1s cubic-bezier(0.55, 0, 1, 0.45) forwards;
+      }
+
+      @keyframes ink-fall {
+        0%   { transform: translateY(-170px) scale(0.7); opacity: 0; }
+        15%  { opacity: 1; }
+        75%  { transform: translateY(0) scale(1); }
+        88%  { transform: translateY(2px) scaleX(1.7) scaleY(0.45); opacity: 1; }
+        100% { transform: translateY(2px) scaleX(0.25) scaleY(0.25); opacity: 0; }
+      }
+
+      .ink-splatter {
+        position: absolute;
+        width: 0;
+        height: 0;
+        z-index: 2;
+      }
+
+      .ink-splatter span {
+        position: absolute;
+        width: 5px;
+        height: 5px;
+        border-radius: 50%;
+        background: var(--accent-wine);
+        opacity: 0;
+        animation: splatter-fly 0.65s ease-out 0.95s forwards;
+      }
+
+      .ink-splatter span:nth-child(1) { --tx: -28px; --ty: -16px; }
+      .ink-splatter span:nth-child(2) { --tx: 32px;  --ty: -10px; }
+      .ink-splatter span:nth-child(3) { --tx: 4px;   --ty: -30px; }
+      .ink-splatter span:nth-child(4) { --tx: -14px; --ty: -28px; }
+
+      @keyframes splatter-fly {
+        0%   { transform: translate(0, 0) scale(1); opacity: 0.9; }
+        100% { transform: translate(var(--tx), var(--ty)) scale(0); opacity: 0; }
+      }
+
+      .loading-mark {
+        position: relative;
+        z-index: 2;
+        display: block;
+        font-family: 'Fraunces', serif;
+        font-weight: 900;
+        font-style: italic;
+        font-size: 2.4rem;
+        letter-spacing: 0.03em;
+        color: var(--paper);
+        text-shadow: 0 0 22px rgba(176, 122, 63, 0.35);
+        opacity: 0;
+        animation: mark-fade 0.9s ease 1.9s forwards;
+      }
+
+      @keyframes mark-fade {
+        to { opacity: 0.95; }
+      }
+
+      .loading-caption {
+        position: relative;
+        z-index: 2;
+        margin-top: 1rem;
+        font-family: 'Cormorant Garamond', serif;
+        font-style: italic;
+        font-size: 1.1rem;
+        letter-spacing: 0.04em;
+        color: rgba(242, 232, 217, 0.7);
+        opacity: 0;
+        animation: caption-fade 0.6s ease 0.25s forwards;
+      }
+
+      @keyframes caption-fade {
+        to { opacity: 1; }
+      }
+
+      .loading-dots span {
+        display: inline-block;
+        animation: dot-blink 1.4s infinite;
+        opacity: 0.2;
+      }
+
+      .loading-dots span:nth-child(2) { animation-delay: 0.2s; }
+      .loading-dots span:nth-child(3) { animation-delay: 0.4s; }
+
+      @keyframes dot-blink {
+        0%, 80%, 100% { opacity: 0.2; }
+        40% { opacity: 1; }
+      }
+
+      @media (prefers-reduced-motion: reduce) {
+        .ink-drop-icon, .ink-pool, .loading-caption, .loading-mark, .ink-splatter span {
+          animation: none !important;
+          opacity: 1;
+        }
+        .loading-screen {
+          clip-path: none !important;
+          transition: opacity 0.3s ease, visibility 0.3s ease;
+        }
+      }
     </style>
   </head>
-  <body>
+  <body class="is-loading">
+
+    <!-- Ink Loading Screen -->
+    <div class="loading-screen" id="loadingScreen" aria-hidden="true">
+      <div class="ink-pool"></div>
+      <i class="bi bi-droplet-fill ink-drop-icon"></i>
+      <div class="ink-splatter"><span></span><span></span><span></span><span></span></div>
+      <span class="loading-mark">DJ</span>
+      <p class="loading-caption">uncorking the inkwell<span class="loading-dots"><span>.</span><span>.</span><span>.</span></span></p>
+    </div>
 
     <!-- Scroll Progress Bar -->
     <div class="scroll-progress" id="scrollProgress"></div>
@@ -1176,7 +1780,7 @@
         <h1 class="hero-name">Daniel Jhon</h1>
         <p class="hero-surname">Dansoy.</p>
         <p class="lead fs-3 typewriter-text">A vermin with a keyboard</p>
-        <p class="hero-quote">“In the margins, I keep the part of the story that survives the draft.”</p>
+        <p class="hero-quote">"In the margins, I keep the part of the story that survives the draft."</p>
         <p class="hero-caption">A portfolio written like a room full of marked pages, weathered notes, and unfinished thoughts that still insist on becoming something.</p>
         <br>
         <a href="#projects" class="btn btn-baby-blue btn-lg mt-3">View My Work</a>
@@ -1198,7 +1802,7 @@
           <div class="letter-card" id="letterCard">
             <button class="letter-close" onclick="closeEnvelope()"><i class="bi bi-x-lg"></i></button>
             <p class="letter-greeting">Dear visitor,</p>
-            <p class="letter-paragraph">Hi, I'm Daniel Jhon — but most people just call me DJ. I'm currently studying Information Technology at the University of Mindanao, though my path here wasn't exactly linear. I came from Philippine Women's College of Davao, where I took up Arts and Design under the TVL strand — so trading sketchpads for syntax was a curve, but one that taught me more than I expected: my eye for composition, color, and visual storytelling didn't disappear when I switched fields — it just found a new canvas in interfaces and layouts.</p>
+            <p class="letter-paragraph">Hi, I'm Daniel Jhon — but most people just call me DJ. I'm currently studying Information Technology at the University of Mindanao, though my path here wasn't exactly linear. I came from Philippine Women's College, where I took up Arts and Design under the TVL strand — so trading sketchpads for syntax was a curve, but one that taught me more than I expected: my eye for composition, color, and visual storytelling didn't disappear when I switched fields — it just found a new canvas in interfaces and layouts.</p>
             <p class="letter-paragraph">In senior high, I served as our TVL Representative and was part of the school's SGC Student Council, which sharpened my interest in leadership and working with people — something I try to carry into how I collaborate on projects today.</p>
             <p class="letter-paragraph">Right now, I'm expanding my skill set through Python, React, networking, and AI-focused coursework — particularly drawn to how AI can be woven into everyday web apps to make them feel a little more intuitive, a little more alive. Outside of code, I'm still an artist and a reader at heart — Kafka and Dostoevsky are regulars on my shelf, and when I draw, I gravitate toward surrealism with a cartoonish edge.</p>
             <p class="letter-paragraph">I'm currently on the lookout for internship/OJT opportunities where I can put both halves of my brain — the designer and the developer — to work. Got a project in mind or just want to talk shop? Reach out — the links are at the bottom of this page.</p>
@@ -1303,17 +1907,34 @@
 
     <section id="education" class="section-padding">
         <div class="container text-center">
-            <h2 class="mb-5 fw-bold scroll-animate">Education</h2>
+            <h2 class="mb-3 fw-bold scroll-animate">Education</h2>
         <p class="section-note scroll-animate">Every course is a margin note in a longer manuscript; some chapters are technical, some are made of patience.</p>
-            <div class="row justify-content-center">
-                <div class="col-md-8 scroll-animate">
-            <div class="card stamp-card education-stamp p-5">
-              <div class="education-header">Educational Background</div>
-              <p class="education-course">Arts and Design track</p>
-              <p class="education-school">Philippine Women's College of Davao</p>
-              <p class="education-quote">“I first learned how to frame an idea before I ever wrote one in code.”</p>
-              <p class="education-date">2020 – 2022</p>
+            <div class="education-grid mt-5">
+                <div class="scroll-animate-left">
+                  <div class="card stamp-card education-stamp h-100">
+                    <div class="education-postmark">
+                      <span class="education-postmark-code">UM</span>
+                      <span class="education-postmark-status">Present</span>
                     </div>
+                    <span class="education-kicker">Currently Enrolled</span>
+                    <h4 class="education-school">University of Mindanao</h4>
+                    <p class="education-course">BS Information Technology</p>
+                    <p class="education-quote">"Still drafting this chapter — and glad it isn't finished yet."</p>
+                    <p class="education-date">2024 – Present</p>
+                  </div>
+                </div>
+                <div class="scroll-animate-right">
+                  <div class="card stamp-card education-stamp education-stamp-pwc h-100">
+                    <div class="education-postmark">
+                      <span class="education-postmark-code">PWC</span>
+                      <span class="education-postmark-status">Graduate</span>
+                    </div>
+                    <span class="education-kicker">Senior High School</span>
+                    <h4 class="education-school">Philippine Women's College</h4>
+                    <p class="education-course">Arts and Design (TVL)</p>
+                    <p class="education-quote">"I first learned how to frame an idea before I ever wrote one in code."</p>
+                    <p class="education-date">2020 – 2024</p>
+                  </div>
                 </div>
             </div>
         </div>
@@ -1348,33 +1969,33 @@
 
     <section id="contact" class="section-padding">
       <div class="container">
-        <h2 class="mb-5 fw-bold text-center scroll-animate">Contact Me</h2>
+        <h2 class="mb-3 fw-bold text-center scroll-animate">Contact Me</h2>
         <p class="section-note text-center scroll-animate">If the page feels like a letter, this is the return address.</p>
-        <div class="row g-5">
+        <div class="row g-5 mt-2">
           <div class="col-lg-5">
             <div class="row g-4">
               <div class="col-12 scroll-animate-left">
                 <div class="contact-info-card stamp-card p-4 text-center">
-                  <i class="bi bi-envelope-at" style="font-size: 2rem; color: var(--accent-sepia);"></i>
+                  <div class="contact-icon-badge"><i class="bi bi-envelope-at"></i></div>
                   <h5>Email Me</h5>
                   <p class="mb-0">danieljhoncapuno@gmail.com</p>
                 </div>
               </div>
               <div class="col-12 scroll-animate-left">
                 <div class="contact-info-card stamp-card p-4 text-center">
-                  <i class="bi bi-geo-alt" style="font-size: 2rem; color: var(--accent-sepia);"></i>
+                  <div class="contact-icon-badge"><i class="bi bi-geo-alt"></i></div>
                   <h5>Location</h5>
                   <p class="mb-0">Tagum City, Philippines</p>
                 </div>
               </div>
               <div class="col-12 scroll-animate-left">
                 <div class="contact-info-card stamp-card p-4 text-center">
-                  <i class="bi bi-share" style="font-size: 2rem; color: var(--accent-sepia);"></i>
+                  <div class="contact-icon-badge"><i class="bi bi-share"></i></div>
                   <h5>Socials</h5>
                   <div class="d-flex justify-content-center gap-4 mt-2">
-                    <a href="YOUR_FACEBOOK_URL" target="_blank" class="text-primary fs-3 social-link"><i class="bi bi-facebook"></i></a>
-                    <a href="YOUR_GITHUB_URL" target="_blank" class="text-primary fs-3 social-link"><i class="bi bi-github"></i></a>
-                    <a href="YOUR_TWITTER_URL" target="_blank" class="text-primary fs-3 social-link"><i class="bi bi-twitter-x"></i></a>
+                    <a href="YOUR_FACEBOOK_URL" target="_blank" class="text-primary fs-3 social-link" aria-label="Facebook"><i class="bi bi-facebook"></i></a>
+                    <a href="YOUR_GITHUB_URL" target="_blank" class="text-primary fs-3 social-link" aria-label="GitHub"><i class="bi bi-github"></i></a>
+                    <a href="YOUR_TWITTER_URL" target="_blank" class="text-primary fs-3 social-link" aria-label="Twitter/X"><i class="bi bi-twitter-x"></i></a>
                   </div>
                 </div>
               </div>
@@ -1382,20 +2003,22 @@
           </div>
           
           <div class="col-lg-7 scroll-animate-right">
-            <form class="p-5 rounded-4 bg-dark border border-secondary shadow-lg">
-              <div class="mb-3">
-                <label class="form-label text-white small fw-bold">Input name:</label>
-                <input type="text" class="form-control bg-dark text-white border-secondary py-3" placeholder="Input name:">
-              </div>
-              <div class="mb-3">
-                <label class="form-label text-white small fw-bold">Email:</label>
-                <input type="email" class="form-control bg-dark text-white border-secondary py-3" placeholder="Email:">
+            <form class="contact-postcard">
+              <div class="contact-postcard-stamp"><i class="bi bi-envelope-paper-heart"></i></div>
+              <p class="contact-postcard-label">Write a letter back —</p>
+              <div class="mb-4">
+                <label class="contact-label">From</label>
+                <input type="text" class="contact-input" placeholder="Your name">
               </div>
               <div class="mb-4">
-                <label class="form-label text-white small fw-bold">Message:</label>
-                <textarea class="form-control bg-dark text-white border-secondary" rows="5" placeholder="Message:"></textarea>
+                <label class="contact-label">Return Address (Email)</label>
+                <input type="email" class="contact-input" placeholder="you@example.com">
               </div>
-              <button type="submit" class="btn btn-baby-blue w-100 py-3">SEND MESSAGE</button>
+              <div class="mb-4">
+                <label class="contact-label">Message</label>
+                <textarea class="contact-input" rows="5" placeholder="Write what's on your mind..."></textarea>
+              </div>
+              <button type="submit" class="btn-send">Send the Letter</button>
             </form>
           </div>
         </div>
@@ -1407,13 +2030,70 @@
     </footer>
 
     <!-- Back to Top Button -->
-    <div class="back-to-top" id="backToTop">
-      <i class="bi bi-arrow-up"></i>
+    <!-- Back to Top: Candle -->
+    <div class="back-to-top" id="backToTop" role="button" tabindex="0" aria-label="Blow out the candle and return to the top">
+      <div class="candle-flame"></div>
+      <div class="candle-wick"></div>
+      <div class="candle-stick"></div>
+      <span class="candle-smoke"></span>
+      <span class="candle-smoke"></span>
+      <span class="candle-smoke"></span>
+    </div>
+
+    <!-- Burn Page Transition -->
+    <div class="burn-overlay" id="burnOverlay" aria-hidden="true">
+      <span class="ember-wisp"></span>
+      <span class="ember-wisp"></span>
+      <span class="ember-wisp"></span>
+      <span class="ember-wisp"></span>
+      <span class="ember-wisp"></span>
+      <span class="ash-fleck"></span>
+      <span class="ash-fleck ash-fleck-alt"></span>
+      <span class="ash-fleck"></span>
+      <span class="ash-fleck ash-fleck-alt"></span>
+      <span class="ash-fleck"></span>
+      <span class="ash-fleck ash-fleck-alt"></span>
+      <span class="ash-fleck"></span>
+      <span class="ash-fleck ash-fleck-alt"></span>
+      <span class="ash-fleck"></span>
+      <span class="ash-fleck ash-fleck-alt"></span>
+      <span class="ash-fleck"></span>
+      <span class="ash-fleck ash-fleck-alt"></span>
+      <span class="ash-fleck"></span>
+      <span class="ash-fleck ash-fleck-alt"></span>
+      <span class="ash-fleck"></span>
+      <span class="ash-fleck ash-fleck-alt"></span>
+      <span class="ash-fleck"></span>
+      <span class="ash-fleck ash-fleck-alt"></span>
+      <span class="ash-fleck"></span>
+      <span class="ash-fleck ash-fleck-alt"></span>
+      <span class="ash-fleck"></span>
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 
     <script>
+      // Ink Loading Screen
+      (function () {
+        const loader = document.getElementById('loadingScreen');
+        const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+        const minDisplay = reduceMotion ? 300 : 3000;
+
+        function dismissLoader() {
+          if (!loader) return;
+          loader.classList.add(reduceMotion ? 'is-hidden' : 'is-draining');
+          document.body.classList.remove('is-loading');
+          setTimeout(() => loader.remove(), reduceMotion ? 400 : 1300);
+        }
+
+        window.addEventListener('load', () => {
+          setTimeout(dismissLoader, minDisplay);
+        });
+
+        // Safety net in case the load event is delayed by slow assets
+        setTimeout(dismissLoader, 6000);
+      })();
+
       // Flip Profile Picture Function
       function flipProfile() {
         const profile = document.getElementById('profilePicture');
@@ -1428,8 +2108,11 @@
         scrollProgress.style.width = scrolled + '%';
       });
 
-      // Back to Top Button
+      // Back to Top: Candle
       const backToTop = document.getElementById('backToTop');
+      const burnOverlay = document.getElementById('burnOverlay');
+      const candleReduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
       window.addEventListener('scroll', () => {
         if (window.scrollY > 300) {
           backToTop.classList.add('visible');
@@ -1438,8 +2121,45 @@
         }
       });
 
-      backToTop.addEventListener('click', () => {
-        window.scrollTo({ top: 0, behavior: 'smooth' });
+      function burnToTop() {
+        if (candleReduceMotion) {
+          window.scrollTo({ top: 0, behavior: 'smooth' });
+          return;
+        }
+
+        if (backToTop.classList.contains('is-extinguishing') || backToTop.classList.contains('is-burning-active')) {
+          return; // already mid-sequence
+        }
+
+        backToTop.classList.add('is-extinguishing', 'is-burning-active');
+
+        // Candle blows out, smoke rises, then the page catches
+        setTimeout(() => {
+          burnOverlay.classList.add('is-burning');
+        }, 350);
+
+        // Once the burn wipe has fully covered the screen, jump to top while hidden
+        setTimeout(() => {
+          window.scrollTo({ top: 0, behavior: 'auto' });
+          burnOverlay.classList.remove('is-burning');
+          burnOverlay.classList.add('is-clearing');
+          backToTop.classList.remove('is-extinguishing');
+          backToTop.classList.add('is-relighting');
+        }, 1400);
+
+        // Clean up: clear the ash, relight the candle, re-enable the button
+        setTimeout(() => {
+          burnOverlay.classList.remove('is-clearing');
+          backToTop.classList.remove('is-relighting', 'is-burning-active');
+        }, 1950);
+      }
+
+      backToTop.addEventListener('click', burnToTop);
+      backToTop.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter' || e.key === ' ') {
+          e.preventDefault();
+          burnToTop();
+        }
       });
 
       // Scroll Animation Observer
@@ -1452,6 +2172,8 @@
         entries.forEach(entry => {
           if (entry.isIntersecting) {
             entry.target.classList.add('visible');
+          } else {
+            entry.target.classList.remove('visible');
           }
         });
       }, observerOptions);
