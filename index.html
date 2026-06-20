@@ -1,0 +1,1400 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>My Portfolio | Daniel Jhon Capuno</title>
+    
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,500;0,700;0,900;1,500;1,700;1,900&family=Caveat:wght@500;600;700&family=Cormorant+Garamond:wght@400;500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <style>
+      :root {
+        --baby-blue: #89CFF0;
+        --baby-blue-glow: rgba(137, 207, 240, 0.4);
+        --paper: #f2e8d9;
+        --paper-deep: #e7d7c1;
+        --ink: #1b1612;
+        --ink-soft: rgba(27, 22, 18, 0.72);
+        --ink-muted: rgba(27, 22, 18, 0.52);
+        --accent-wine: #8e3d4d;
+        --accent-sepia: #b07a3f;
+        --accent-royal: #51698f;
+      }
+
+      body {
+        font-family: 'Cormorant Garamond', serif;
+        background:
+          radial-gradient(circle at 18% 12%, rgba(176, 122, 63, 0.12), transparent 26%),
+          radial-gradient(circle at 84% 18%, rgba(142, 61, 77, 0.10), transparent 24%),
+          radial-gradient(circle at 50% 100%, rgba(81, 105, 143, 0.10), transparent 34%),
+          linear-gradient(180deg, #15110e 0%, #1a1511 42%, #100d0b 100%);
+        color: var(--paper);
+        overflow-x: hidden;
+      }
+
+      body::before {
+        content: '';
+        position: fixed;
+        inset: 0;
+        pointer-events: none;
+        background-image:
+          linear-gradient(rgba(255,255,255,0.03) 1px, transparent 1px),
+          linear-gradient(90deg, rgba(255,255,255,0.02) 1px, transparent 1px);
+        background-size: 100% 4px, 4px 100%;
+        opacity: 0.08;
+        mix-blend-mode: soft-light;
+        z-index: 0;
+      }
+
+      body > * {
+        position: relative;
+        z-index: 1;
+      }
+
+      /* --- SCROLL PROGRESS BAR --- */
+      .scroll-progress {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 0%;
+        height: 4px;
+        background: linear-gradient(90deg, var(--accent-sepia), var(--accent-wine), var(--accent-royal));
+        z-index: 9999;
+        transition: width 0.1s ease-out;
+        box-shadow: 0 0 10px rgba(176, 122, 63, 0.35);
+      }
+
+      /* --- LITERARY NAVBAR --- */
+      .navbar {
+        background: rgba(18, 14, 11, 0.58) !important;
+        backdrop-filter: blur(12px);
+        -webkit-backdrop-filter: blur(12px);
+        border-bottom: none !important;
+        padding: 18px 0;
+        z-index: 1000;
+        box-shadow: 0 1px 0 rgba(255,255,255,0.05), 0 10px 30px rgba(0,0,0,0.28);
+      }
+
+      .nav-link {
+        color: rgba(242, 232, 217, 0.82) !important;
+        font-weight: 500;
+        transition: 0.3s;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        font-size: 0.82rem;
+      }
+
+      .nav-link:hover {
+        color: var(--accent-sepia) !important;
+      }
+
+      /* --- HERO SECTION --- */
+      #home {
+        position: relative;
+        color: var(--paper);
+        padding: 250px 0 100px 0;
+        min-height: 100vh;
+        display: flex;
+        align-items: center;
+        overflow: hidden;
+      }
+
+      /* Video background */
+      #home .video-background {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        z-index: 0;
+        overflow: hidden;
+      }
+
+      #home .video-background video {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        min-width: 100%;
+        min-height: 100%;
+        width: auto;
+        height: auto;
+        transform: translate(-50%, -50%);
+        object-fit: cover;
+      }
+
+      #home::before {
+        content: "";
+        position: absolute;
+        top: 0; left: 0; right: 0; bottom: 0;
+        background:
+          linear-gradient(180deg, rgba(10, 8, 6, 0.58), rgba(10, 8, 6, 0.74)),
+          radial-gradient(circle at 50% 40%, rgba(176, 122, 63, 0.08), transparent 42%);
+        z-index: 1;
+      }
+
+      #home .container {
+        position: relative;
+        z-index: 2;
+      }
+
+      /* --- FLIP PROFILE PICTURE --- */
+      .profile-picture-wrapper {
+        perspective: 1000px;
+        width: 300px;
+        max-width: 70vw;
+        margin: 0 auto 30px;
+        cursor: pointer;
+      }
+
+      .profile-picture { 
+        position: relative; 
+        width: 100%;
+        aspect-ratio: 1 / 1; 
+        transform-style: preserve-3d;
+        transition: transform 0.8s cubic-bezier(0.4, 0.0, 0.2, 1);
+      }
+
+      .profile-picture-wrapper:hover .profile-picture {
+        transform: scale(1.05);
+      }
+
+      .profile-picture.flipped {
+        transform: rotateY(180deg);
+      }
+
+      .profile-face {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        backface-visibility: hidden;
+        border-radius: 50%;
+        overflow: hidden;
+        border: 4px solid rgba(176, 122, 63, 0.82);
+        box-shadow: 0 0 25px rgba(176, 122, 63, 0.25);
+        animation: glow-candle-wax 2.8s infinite alternate;
+      }
+
+      .profile-face.back {
+        transform: rotateY(180deg);
+      }
+
+      .profile-face img { 
+        width: 100%; 
+        height: 100%; 
+        object-fit: cover; 
+      }
+
+      @keyframes glow-candle-wax {
+        0% { box-shadow: 0 0 12px rgba(176, 122, 63, 0.16), 0 0 28px rgba(142, 61, 77, 0.08); }
+        100% { box-shadow: 0 0 40px rgba(176, 122, 63, 0.28), 0 0 64px rgba(142, 61, 77, 0.14); }
+      }
+
+      /* Click hint */
+      .flip-hint {
+        text-align: center;
+        color: rgba(242, 232, 217, 0.62);
+        font-size: 0.85rem;
+        margin-top: -20px;
+        margin-bottom: 20px;
+        animation: pulse-hint 2s infinite;
+      }
+
+      @keyframes pulse-hint {
+        0%, 100% { opacity: 0.6; }
+        50% { opacity: 1; }
+      }
+
+      /* --- TYPEWRITER --- */
+      .typewriter-text {
+        overflow: hidden;
+        border-right: .15em solid var(--accent-sepia);
+        white-space: nowrap;
+        margin: 0 auto;
+        display: inline-block;
+        animation: typing 3.5s steps(30, end), blink-caret .75s step-end infinite;
+      }
+
+      @keyframes typing { from { width: 0 } to { width: 100% } }
+      @keyframes blink-caret { from, to { border-color: transparent } 50% { border-color: var(--accent-sepia); } }
+
+      /* --- HERO TYPOGRAPHY WITH FRAUNCES --- */
+      .hero-subtitle {
+        color: rgba(242, 232, 217, 0.66);
+        font-size: 1.1rem;
+        font-style: italic;
+        font-weight: 300;
+        letter-spacing: 1px;
+        margin-bottom: 10px;
+      }
+
+      .hero-name {
+        font-family: 'Fraunces', serif;
+        font-size: 4.5rem;
+        font-weight: 900;
+        color: var(--paper);
+        line-height: 1.1;
+        margin: 0;
+      }
+
+      .hero-surname {
+        font-family: 'Fraunces', serif;
+        font-size: 4.5rem;
+        font-weight: 700;
+        font-style: italic;
+        font-variation-settings: 'SOFT' 100;
+        color: #dbc2a0;
+        text-shadow: 0 0 20px rgba(176, 122, 63, 0.20), 0 0 40px rgba(142, 61, 77, 0.14);
+        line-height: 1.1;
+        margin: 0;
+      }
+
+      .hero-quote {
+        max-width: 680px;
+        margin: 1.1rem auto 0.6rem;
+        color: rgba(242, 232, 217, 0.74);
+        font-family: 'Cormorant Garamond', serif;
+        font-size: 1.35rem;
+        font-style: italic;
+        letter-spacing: 0.02em;
+      }
+
+      .hero-quote::before,
+      .hero-quote::after {
+        color: rgba(176, 122, 63, 0.68);
+      }
+
+      /* Section Headers with Fraunces */
+      h2 {
+        font-family: 'Fraunces', serif;
+        font-weight: 700;
+        color: var(--paper);
+        letter-spacing: 0.02em;
+      }
+
+      /* --- SCROLL ANIMATIONS --- */
+      .scroll-animate {
+        opacity: 1;
+        transform: translateY(0);
+        transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+      }
+
+      .scroll-animate.visible {
+        opacity: 1;
+        transform: translateY(0);
+      }
+
+      .scroll-animate-left {
+        opacity: 1;
+        transform: translateX(0);
+        transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+      }
+
+      .scroll-animate-left.visible {
+        opacity: 1;
+        transform: translateX(0);
+      }
+
+      .scroll-animate-right {
+        opacity: 1;
+        transform: translateX(0);
+        transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+      }
+
+      .scroll-animate-right.visible {
+        opacity: 1;
+        transform: translateX(0);
+      }
+
+      /* Staggered animation delays */
+      .scroll-animate:nth-child(1) { transition-delay: 0.1s; }
+      .scroll-animate:nth-child(2) { transition-delay: 0.2s; }
+      .scroll-animate:nth-child(3) { transition-delay: 0.3s; }
+      .scroll-animate:nth-child(4) { transition-delay: 0.4s; }
+
+      /* --- CARD STYLING & BALANCE --- */
+      .card, .cert-card, .contact-info-card {
+        background: linear-gradient(165deg, rgba(244, 234, 218, 0.96), rgba(232, 214, 191, 0.92)) !important;
+        color: #2b241d !important;
+        border: 1px solid rgba(122, 92, 61, 0.18) !important;
+        border-radius: 20px;
+        transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275), box-shadow 0.4s ease, border-color 0.4s ease !important;
+        box-shadow: 0 18px 32px rgba(0,0,0,0.28), inset 0 0 0 1px rgba(255,255,255,0.32);
+      }
+
+      /* FIX FOR CONTACT TEXT COLOR */
+      .contact-info-card h5 {
+        color: var(--accent-wine) !important;
+        font-weight: bold;
+      }
+
+      .contact-info-card p {
+        color: var(--accent-royal) !important;
+      }
+
+      .card:hover, .cert-card:hover, .contact-info-card:hover {
+        transform: translateY(-10px) scale(1.015) !important;
+        box-shadow: 0 24px 42px rgba(0, 0, 0, 0.42) !important;
+        border-color: rgba(176, 122, 63, 0.48) !important;
+      }
+
+      .service-stamp {
+        --accent: #a95e16;
+        --accent-soft: rgba(169, 94, 22, 0.14);
+        --accent-deep: #6f3d0f;
+        position: relative;
+        overflow: hidden;
+        background:
+          radial-gradient(circle at top left, rgba(255,255,255,0.92), transparent 38%),
+          linear-gradient(160deg, rgba(255,255,255,0.72), rgba(245,232,203,0.95)),
+          #f3e6c9 !important;
+        color: #2b2620 !important;
+        border: 2px solid rgba(110, 83, 41, 0.18) !important;
+        border-radius: 14px;
+        padding: 2rem 1.5rem;
+        text-align: center;
+        box-shadow:
+          0 18px 30px rgba(0,0,0,0.35),
+          inset 0 0 0 1px rgba(255,255,255,0.45);
+        transform: translateY(0) rotate(0deg);
+        transition:
+          transform 0.45s cubic-bezier(0.175, 0.885, 0.32, 1.275),
+          box-shadow 0.45s ease,
+          filter 0.45s ease;
+      }
+
+      .service-stamp:hover {
+        transform: translateY(-12px) rotate(-0.6deg) scale(1.02);
+        filter: saturate(1.05);
+        box-shadow:
+          0 24px 38px rgba(0,0,0,0.42),
+          0 0 0 1px rgba(255,255,255,0.18),
+          inset 0 0 0 1px rgba(255,255,255,0.45);
+      }
+
+      .service-stamp::before {
+        content: '';
+        position: absolute;
+        inset: 10px;
+        border: 2px dashed rgba(73, 52, 24, 0.58);
+        border-radius: 10px;
+        pointer-events: none;
+      }
+
+      .service-stamp::after {
+        content: '';
+        position: absolute;
+        inset: 0;
+        background:
+          radial-gradient(circle at top, rgba(255,255,255,0.95) 0 6px, transparent 6.5px) top center / 18px 18px repeat-x,
+          radial-gradient(circle at bottom, rgba(255,255,255,0.95) 0 6px, transparent 6.5px) bottom center / 18px 18px repeat-x,
+          radial-gradient(circle at left, rgba(255,255,255,0.95) 0 6px, transparent 6.5px) center left / 18px 18px repeat-y,
+          radial-gradient(circle at right, rgba(255,255,255,0.95) 0 6px, transparent 6.5px) center right / 18px 18px repeat-y;
+        opacity: 0.28;
+        pointer-events: none;
+        mix-blend-mode: screen;
+      }
+
+      .service-stamp.service-stamp-design {
+        --accent: #3a71c1;
+        --accent-soft: rgba(58, 113, 193, 0.16);
+        --accent-deep: #24477e;
+        box-shadow:
+          0 18px 30px rgba(0,0,0,0.35),
+          inset 0 0 0 1px rgba(255,255,255,0.45),
+          inset 0 12px 28px rgba(58, 113, 193, 0.08);
+      }
+
+      .service-stamp.service-stamp-dev {
+        --accent: #2b8f7d;
+        --accent-soft: rgba(43, 143, 125, 0.16);
+        --accent-deep: #1d5b52;
+        box-shadow:
+          0 18px 30px rgba(0,0,0,0.35),
+          inset 0 0 0 1px rgba(255,255,255,0.45),
+          inset 0 12px 28px rgba(43, 143, 125, 0.08);
+      }
+
+      .service-stamp.service-stamp-student {
+        --accent: #c97a2d;
+        --accent-soft: rgba(201, 122, 45, 0.16);
+        --accent-deep: #8b4d16;
+        box-shadow:
+          0 18px 30px rgba(0,0,0,0.35),
+          inset 0 0 0 1px rgba(255,255,255,0.45),
+          inset 0 12px 28px rgba(201, 122, 45, 0.08);
+      }
+
+      .stamp-card {
+        position: relative;
+        overflow: hidden;
+        background:
+          radial-gradient(circle at top left, rgba(255,255,255,0.78), transparent 36%),
+          linear-gradient(160deg, rgba(244, 233, 213, 0.98), rgba(233, 214, 188, 0.96)) !important;
+        color: #2b241d !important;
+        border: 2px solid rgba(98, 70, 42, 0.22) !important;
+        box-shadow:
+          0 18px 32px rgba(0,0,0,0.28),
+          inset 0 0 0 1px rgba(255,255,255,0.38) !important;
+      }
+
+      .stamp-card::before {
+        content: '';
+        position: absolute;
+        inset: 10px;
+        border: 2px dashed rgba(52, 37, 22, 0.66);
+        border-radius: 12px;
+        pointer-events: none;
+      }
+
+      .stamp-card::after {
+        content: '';
+        position: absolute;
+        inset: 0;
+        background:
+          radial-gradient(circle at top, rgba(255,255,255,0.86) 0 5px, transparent 5.5px) top center / 16px 16px repeat-x,
+          radial-gradient(circle at bottom, rgba(255,255,255,0.86) 0 5px, transparent 5.5px) bottom center / 16px 16px repeat-x,
+          radial-gradient(circle at left, rgba(255,255,255,0.86) 0 5px, transparent 5.5px) center left / 16px 16px repeat-y,
+          radial-gradient(circle at right, rgba(255,255,255,0.86) 0 5px, transparent 5.5px) center right / 16px 16px repeat-y;
+        opacity: 0.24;
+        pointer-events: none;
+        mix-blend-mode: screen;
+      }
+
+      .stamp-card:hover {
+        border-color: rgba(176, 122, 63, 0.5) !important;
+        box-shadow:
+          0 24px 40px rgba(0,0,0,0.36),
+          inset 0 0 0 1px rgba(255,255,255,0.4) !important;
+      }
+
+      .stamp-card .text-primary {
+        color: var(--accent-wine) !important;
+      }
+
+      .stamp-card .card-title,
+      .stamp-card h4,
+      .stamp-card h5 {
+        color: var(--accent-sepia) !important;
+      }
+
+      .stamp-card .text-muted,
+      .stamp-card p {
+        color: rgba(43, 36, 29, 0.78) !important;
+      }
+
+      .service-stamp.service-stamp-write {
+        --accent: #7c5ad6;
+        --accent-soft: rgba(124, 90, 214, 0.16);
+        --accent-deep: #4e378f;
+        box-shadow:
+          0 18px 30px rgba(0,0,0,0.35),
+          inset 0 0 0 1px rgba(255,255,255,0.45),
+          inset 0 12px 28px rgba(124, 90, 214, 0.08);
+      }
+
+      .service-stamp.service-stamp-research {
+        --accent: #c45b74;
+        --accent-soft: rgba(196, 91, 116, 0.16);
+        --accent-deep: #8b334a;
+        box-shadow:
+          0 18px 30px rgba(0,0,0,0.35),
+          inset 0 0 0 1px rgba(255,255,255,0.45),
+          inset 0 12px 28px rgba(196, 91, 116, 0.08);
+      }
+
+      .service-stamp h4 {
+        color: var(--accent) !important;
+        font-family: 'Fraunces', serif;
+        font-weight: 700;
+        letter-spacing: 0.2px;
+        margin-bottom: 0.7rem;
+        font-size: 1.55rem;
+        line-height: 1.1;
+      }
+
+      .service-stamp .service-kicker {
+        display: none;
+      }
+
+      .service-stamp .service-icon {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        width: 3rem;
+        height: 3rem;
+        margin: 0 auto 1rem;
+        border-radius: 50%;
+        background: radial-gradient(circle at 30% 30%, rgba(255,255,255,0.35), transparent 45%), var(--accent-soft);
+        color: var(--accent);
+        box-shadow:
+          inset 0 1px 2px rgba(255,255,255,0.5),
+          0 0 0 1px rgba(255,255,255,0.18);
+      }
+
+      .service-stamp .service-icon i {
+        font-size: 1.1rem;
+      }
+
+      .service-stamp .service-copy {
+        color: #4a4033 !important;
+        font-family: 'Inter', sans-serif;
+        font-size: 1rem;
+        line-height: 1.78;
+        margin: 0 auto;
+        max-width: 26ch;
+      }
+
+      .services-intro {
+        max-width: 760px;
+        margin: -0.6rem auto 2rem;
+        color: rgba(224, 224, 224, 0.72);
+        line-height: 1.75;
+        font-size: 1rem;
+      }
+
+      .services-bridge {
+        max-width: 720px;
+        margin: 1.8rem auto 2.35rem;
+        color: rgba(224, 224, 224, 0.55);
+        font-size: 0.92rem;
+        letter-spacing: 0.02em;
+      }
+
+      .cert-img-wrapper {
+        width: 100%;
+        aspect-ratio: 4 / 3;
+        overflow: hidden;
+        border-radius: 12px;
+        background: linear-gradient(160deg, rgba(18,14,11,0.15), rgba(176,122,63,0.1));
+      }
+
+      .cert-img-wrapper img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+
+      /* --- PROJECTS --- */
+      .project-icon-link {
+        text-decoration: none;
+        display: block;
+        transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      }
+
+      .project-icon-link:hover {
+        transform: translateY(-20px) scale(1.1);
+      }
+
+      .char-btn {
+        height: 220px;
+        width: auto;
+        margin-bottom: 15px;
+        filter: drop-shadow(0 10px 15px rgba(0,0,0,0.5));
+        transition: filter 0.3s;
+      }
+
+      .project-icon-link:hover .char-btn {
+        filter: drop-shadow(0 15px 25px rgba(176, 122, 63, 0.35));
+      }
+
+      /* --- BUTTONS & MODALS --- */
+      .btn-baby-blue {
+        background: transparent;
+        color: var(--paper);
+        border: 2px solid rgba(176, 122, 63, 0.7);
+        border-radius: 30px;
+        padding: 12px 35px;
+        font-weight: bold;
+        transition: 0.3s;
+        text-decoration: none;
+        display: inline-block;
+      }
+
+      .btn-baby-blue:hover {
+        background: var(--accent-sepia);
+        color: #120f0c;
+        box-shadow: 0 0 20px rgba(176, 122, 63, 0.28);
+      }
+
+      .modal-content {
+        background-color: rgba(20, 16, 13, 0.98);
+        border: 2px solid rgba(176, 122, 63, 0.72);
+        border-radius: 25px;
+      }
+
+      /* --- BACK TO TOP BUTTON --- */
+      .back-to-top {
+        position: fixed;
+        bottom: 30px;
+        right: 30px;
+        width: 50px;
+        height: 50px;
+        background: var(--accent-sepia);
+        color: #120f0c;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 1.5rem;
+        cursor: pointer;
+        opacity: 0;
+        visibility: hidden;
+        transition: all 0.3s;
+        z-index: 999;
+        box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+      }
+
+      .back-to-top.visible {
+        opacity: 1;
+        visibility: visible;
+      }
+
+      .back-to-top:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 10px 25px rgba(176, 122, 63, 0.35);
+      }
+
+      .section-padding { padding: 100px 0; }
+      .section-padding {
+        position: relative;
+        isolation: isolate;
+      }
+
+      .section-padding::before {
+        content: '';
+        position: absolute;
+        inset: 0;
+        pointer-events: none;
+        background:
+          linear-gradient(180deg, rgba(255,255,255,0.02), rgba(0,0,0,0.08)),
+          radial-gradient(circle at top right, rgba(176, 122, 63, 0.07), transparent 32%),
+          radial-gradient(circle at bottom left, rgba(81, 105, 143, 0.06), transparent 28%);
+        z-index: -1;
+      }
+
+      #about { background: linear-gradient(180deg, rgba(24, 19, 15, 0.95), rgba(19, 15, 12, 0.95)); }
+      #services, #education, #contact { background: linear-gradient(180deg, rgba(18, 14, 11, 0.96), rgba(23, 18, 14, 0.96)); }
+      #certifications, #projects { background: linear-gradient(180deg, rgba(22, 17, 13, 0.95), rgba(18, 14, 11, 0.95)); }
+
+      .section-note {
+        max-width: 760px;
+        margin: -1rem auto 2.2rem;
+        color: rgba(242, 232, 217, 0.64);
+        font-size: 1rem;
+        font-style: italic;
+        line-height: 1.8;
+      }
+
+      .section-note strong {
+        color: var(--accent-sepia);
+        font-weight: 600;
+      }
+
+      .section-note::before {
+        content: '—';
+        color: rgba(176, 122, 63, 0.7);
+        margin-right: 0.35rem;
+      }
+
+      .hero-caption {
+        max-width: 700px;
+        margin: 0.9rem auto 1.4rem;
+        color: rgba(242, 232, 217, 0.68);
+        font-size: 1rem;
+        font-family: 'Inter', sans-serif;
+        line-height: 1.75;
+      }
+
+      /* --- ABOUT ME: ENVELOPE + LETTER --- */
+      .envelope-wrapper {
+        max-width: 980px;
+        margin: 0 auto;
+        position: relative;
+        perspective: 1200px;
+        display: grid;
+        grid-template-columns: 1fr;
+        grid-template-rows: 1fr;
+        justify-items: center;
+        align-items: center;
+      }
+
+      .envelope {
+        grid-column: 1;
+        grid-row: 1;
+        position: relative;
+        width: 100%;
+        aspect-ratio: 3 / 2;
+        cursor: pointer;
+        transition: opacity 0.5s ease, transform 0.5s ease;
+        z-index: 5;
+      }
+
+      .envelope.open {
+        opacity: 0;
+        transform: scale(0.9) translateY(-10px);
+        pointer-events: none;
+      }
+
+      .envelope-body {
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(160deg, #f5f0e8, #e8ddc8);
+        border-radius: 10px;
+        box-shadow: 0 15px 35px rgba(0,0,0,0.5);
+        overflow: hidden;
+      }
+
+      .envelope-body::before,
+      .envelope-body::after {
+        content: '';
+        position: absolute;
+        bottom: 0;
+        width: 0;
+        height: 0;
+        border-style: solid;
+      }
+
+      .envelope-body::before {
+        left: 0;
+        border-width: 0 0 70% 50%;
+        border-color: transparent transparent rgba(0,0,0,0.06) transparent;
+      }
+
+      .envelope-body::after {
+        right: 0;
+        border-width: 0 50% 70% 0;
+        border-color: transparent transparent rgba(0,0,0,0.06) transparent;
+      }
+
+      .envelope-flap {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 65%;
+        background: linear-gradient(160deg, #ece2cf, #ddcfb2);
+        clip-path: polygon(0 0, 100% 0, 50% 85%);
+        transform-origin: top center;
+        transition: transform 0.7s cubic-bezier(0.65, 0, 0.35, 1);
+        box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+        z-index: 3;
+      }
+
+      .envelope.open .envelope-flap {
+        transform: rotateX(180deg);
+      }
+
+      .wax-seal {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: 72px;
+        height: 68px;
+        border-radius: 52% 48% 50% 50% / 46% 44% 56% 54%;
+        background:
+          radial-gradient(circle at 32% 28%, rgba(255,255,255,0.38), rgba(255,255,255,0) 28%),
+          radial-gradient(circle at 50% 42%, #bce7fb 0%, var(--baby-blue) 55%, #5ebbf0 84%, #469dd2 100%);
+        border: 1px solid rgba(255,255,255,0.16);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-family: 'Fraunces', serif;
+        font-weight: 900;
+        font-style: italic;
+        font-size: 1.2rem;
+        color: #163244;
+        text-shadow: 0 1px 0 rgba(255,255,255,0.35);
+        box-shadow:
+          0 8px 18px rgba(0,0,0,0.38),
+          inset 0 2px 4px rgba(255,255,255,0.35),
+          inset 0 -7px 10px rgba(0,0,0,0.12);
+        z-index: 4;
+      }
+
+      .wax-seal::before {
+        content: '';
+        position: absolute;
+        left: 10px;
+        bottom: -10px;
+        width: 18px;
+        height: 20px;
+        background: linear-gradient(180deg, #7ec6e8, #5ebbf0 70%, #4b9fd3);
+        border-radius: 48% 48% 60% 60% / 38% 38% 72% 72%;
+        transform: rotate(10deg);
+        box-shadow: 0 3px 8px rgba(0,0,0,0.18), inset 0 2px 3px rgba(255,255,255,0.18);
+      }
+
+      .wax-seal::after {
+        content: '';
+        position: absolute;
+        right: 12px;
+        top: 8px;
+        width: 14px;
+        height: 10px;
+        background: rgba(255,255,255,0.18);
+        border-radius: 50%;
+        filter: blur(1px);
+      }
+
+      .envelope-hint {
+        text-align: center;
+        color: rgba(255,255,255,0.55);
+        font-size: 0.9rem;
+        margin-top: 18px;
+        animation: pulse-hint 2s infinite;
+      }
+
+      .letter-card {
+        grid-column: 1;
+        grid-row: 1;
+        position: relative;
+        width: 100%;
+        background: linear-gradient(170deg, #f8f3ea, #efe6d4);
+        color: #2b2620;
+        border-radius: 12px;
+        padding: 40px 34px;
+        text-align: left;
+        box-shadow: 0 20px 50px rgba(0,0,0,0.55);
+        opacity: 0;
+        transform: translateY(25px) scale(0.97);
+        pointer-events: none;
+        transition: opacity 0.6s ease, transform 0.6s ease;
+        overflow-y: auto;
+        z-index: 0;
+        max-height: 60vh;
+      }
+
+      .letter-card.visible {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+        pointer-events: auto;
+        z-index: 10;
+      }
+
+      .letter-close {
+        position: absolute;
+        top: 18px;
+        right: 18px;
+        background: transparent;
+        border: none;
+        color: rgba(0,0,0,0.4);
+        font-size: 1.1rem;
+        cursor: pointer;
+        transition: color 0.3s;
+      }
+
+      .letter-close:hover { color: #1a1a1a; }
+
+      .letter-greeting {
+        font-family: 'Caveat', cursive;
+        font-weight: 700;
+        font-size: 1.8rem;
+        color: #3a3a3a;
+        margin-bottom: 8px;
+      }
+
+      .letter-paragraph {
+        font-family: 'Inter', sans-serif;
+        font-size: 0.9rem;
+        line-height: 1.65;
+        color: #3a3530;
+        margin-bottom: 14px;
+      }
+
+      .letter-signature {
+        font-family: 'Caveat', cursive;
+        font-weight: 700;
+        font-size: 1.5rem;
+        color: var(--baby-blue);
+        margin-top: 20px;
+        text-shadow: 0 1px 1px rgba(0,0,0,0.1);
+      }
+
+      /* Mobile & Tablet Responsive */
+      @media (max-width: 1024px) {
+        .envelope-wrapper { max-width: 450px; }
+        .letter-card { 
+          padding: 30px 26px;
+          max-height: 65vh;
+        }
+        .letter-greeting { font-size: 1.6rem; }
+        .letter-paragraph { font-size: 0.85rem; }
+        .letter-signature { font-size: 1.3rem; }
+      }
+
+      @media (max-width: 768px) {
+        .envelope-wrapper { max-width: 90vw; }
+        .letter-card { 
+          padding: 28px 24px;
+          max-height: 70vh;
+        }
+        .letter-greeting { 
+          font-size: 1.4rem;
+          margin-bottom: 6px;
+        }
+        .letter-paragraph { 
+          font-size: 0.8rem;
+          line-height: 1.55;
+          margin-bottom: 10px;
+        }
+        .letter-signature { 
+          font-size: 1.1rem;
+          margin-top: 14px;
+        }
+      }
+
+      @media (max-width: 576px) {
+        .envelope-wrapper { max-width: 100%; padding: 0 12px; }
+        .envelope { aspect-ratio: 2.5 / 2; }
+        .letter-card { 
+          padding: 22px 18px;
+          max-height: 65vh;
+          border-radius: 8px;
+        }
+        .letter-greeting { 
+          font-size: 1.2rem;
+          margin-bottom: 5px;
+        }
+        .letter-paragraph { 
+          font-size: 0.75rem;
+          line-height: 1.5;
+          margin-bottom: 9px;
+        }
+        .letter-signature { 
+          font-size: 0.95rem;
+          margin-top: 12px;
+        }
+        .letter-close {
+          top: 10px;
+          right: 10px;
+          font-size: 0.9rem;
+        }
+        .wax-seal {
+          width: 52px;
+          height: 52px;
+          font-size: 1rem;
+        }
+        .envelope-hint {
+          font-size: 0.8rem;
+          margin-top: 12px;
+        }
+      }
+      .text-primary { color: var(--accent-sepia) !important; }
+
+      .form-control:focus {
+        background-color: rgba(28, 22, 18, 0.96) !important;
+        border-color: var(--accent-sepia) !important;
+        box-shadow: 0 0 10px rgba(176, 122, 63, 0.22) !important;
+        color: var(--paper) !important;
+      }
+
+      /* --- SOCIAL ICONS HOVER --- */
+      .social-link {
+        transition: transform 0.3s ease, color 0.3s ease;
+        display: inline-block;
+      }
+      .social-link:hover {
+        transform: scale(1.2);
+        color: var(--accent-sepia) !important;
+      }
+
+      .contact-info-card .social-link {
+        color: var(--accent-wine) !important;
+      }
+
+      /* Section Headers Animation */
+      h2 {
+        position: relative;
+        display: inline-block;
+        font-family: 'Fraunces', serif;
+        font-weight: 600;
+      }
+
+      h2::after {
+        content: '';
+        position: absolute;
+        bottom: -10px;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 0;
+        height: 3px;
+        background: linear-gradient(90deg, transparent, var(--accent-sepia), var(--accent-wine), transparent);
+        transition: width 0.6s ease;
+      }
+
+      .scroll-animate.visible h2::after {
+        width: 100%;
+      }
+
+      @media (max-width: 768px) {
+        #home { padding: 150px 0 80px 0; }
+        .typewriter-text { font-size: 1.1rem; white-space: normal; border-right: none; animation: none; }
+        .char-btn { height: 160px; }
+        .back-to-top { bottom: 20px; right: 20px; width: 45px; height: 45px; }
+      }
+    </style>
+  </head>
+  <body>
+
+    <!-- Scroll Progress Bar -->
+    <div class="scroll-progress" id="scrollProgress"></div>
+
+    <nav class="navbar navbar-expand-lg navbar-dark fixed-top">
+      <div class="container">
+        <a class="navbar-brand fw-bold" href="#" style="color: var(--accent-sepia); letter-spacing: 2px;">DANSOYPORTFOLIO</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+          <ul class="navbar-nav ms-auto">
+            <li class="nav-item"><a class="nav-link" href="#home">Home</a></li>
+            <li class="nav-item"><a class="nav-link" href="#about">About</a></li>
+            <li class="nav-item"><a class="nav-link" href="#services">Services</a></li>
+            <li class="nav-item"><a class="nav-link" href="#certifications">Certifications</a></li>
+            <li class="nav-item"><a class="nav-link" href="#education">Education</a></li>
+            <li class="nav-item"><a class="nav-link" href="#projects">Projects</a></li>
+            <li class="nav-item"><a class="nav-link" href="#contact">Contact</a></li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+
+    <section id="home">
+      <!-- Video Background -->
+      <div class="video-background">
+        <video autoplay muted loop playsinline>
+          <source src="images/Jellyfish.mp4" type="video/mp4">
+        </video>
+      </div>
+
+      <div class="container text-center">
+        <!-- Flip Profile Picture -->
+        <div class="profile-picture-wrapper" onclick="flipProfile()">
+          <div class="profile-picture" id="profilePicture">
+            <div class="profile-face front">
+              <img src="images/source.gif" alt="Profile GIF">
+            </div>
+            <div class="profile-face back">
+              <img src="images/personal-photo.jpg" alt="Personal Photo">
+            </div>
+          </div>
+        </div>
+        <p class="flip-hint"><i class="bi bi-hand-index"></i> Click to flip</p>
+        
+        <p class="hero-subtitle">Hi, I'm</p>
+        <h1 class="hero-name">Daniel Jhon</h1>
+        <p class="hero-surname">Dansoy.</p>
+        <p class="lead fs-3 typewriter-text">A vermin with a keyboard</p>
+        <p class="hero-quote">“In the margins, I keep the part of the story that survives the draft.”</p>
+        <p class="hero-caption">A portfolio written like a room full of marked pages, weathered notes, and unfinished thoughts that still insist on becoming something.</p>
+        <br>
+        <a href="#projects" class="btn btn-baby-blue btn-lg mt-3">View My Work</a>
+      </div>
+    </section>
+
+    <section id="about" class="section-padding">
+      <div class="container text-center">
+        <h2 class="mb-5 fw-bold scroll-animate">About Me</h2>
+        <p class="section-note scroll-animate">I like the quiet discipline of old books and the way a well-made sentence can feel like a lit room in winter.</p>
+        <div class="envelope-wrapper scroll-animate">
+          <div class="envelope" id="envelope" onclick="openEnvelope()">
+            <div class="envelope-body"></div>
+            <div class="envelope-flap"></div>
+            <div class="wax-seal">DJ</div>
+          </div>
+          <p class="envelope-hint" id="envelopeHint"><i class="bi bi-envelope-paper"></i> Click to open a letter from DJ</p>
+
+          <div class="letter-card" id="letterCard">
+            <button class="letter-close" onclick="closeEnvelope()"><i class="bi bi-x-lg"></i></button>
+            <p class="letter-greeting">Dear visitor,</p>
+            <p class="letter-paragraph">Hi, I'm Daniel Jhon — but most people just call me DJ. I'm currently studying Information Technology at the University of Mindanao, though my path here wasn't exactly linear. I came from Philippine Women's College of Davao, where I took up Arts and Design under the TVL strand — so trading sketchpads for syntax was a curve, but one that taught me more than I expected: my eye for composition, color, and visual storytelling didn't disappear when I switched fields — it just found a new canvas in interfaces and layouts.</p>
+            <p class="letter-paragraph">In senior high, I served as our TVL Representative and was part of the school's SGC Student Council, which sharpened my interest in leadership and working with people — something I try to carry into how I collaborate on projects today.</p>
+            <p class="letter-paragraph">Right now, I'm expanding my skill set through Python, React, networking, and AI-focused coursework — particularly drawn to how AI can be woven into everyday web apps to make them feel a little more intuitive, a little more alive. Outside of code, I'm still an artist and a reader at heart — Kafka and Dostoevsky are regulars on my shelf, and when I draw, I gravitate toward surrealism with a cartoonish edge.</p>
+            <p class="letter-paragraph">I'm currently on the lookout for internship/OJT opportunities where I can put both halves of my brain — the designer and the developer — to work. Got a project in mind or just want to talk shop? Reach out — the links are at the bottom of this page.</p>
+            <p class="letter-signature">— DJ</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="services" class="section-padding">
+      <div class="container text-center">
+        <h2 class="mb-5 fw-bold scroll-animate">My Services</h2>
+        <p class="services-intro scroll-animate">Three small stamped notes from my desk: one for shaping a page, one for wiring its pulse, and one for helping a student idea leave the page looking ready to be mailed.</p>
+        <div class="row g-4 justify-content-center">
+          <div class="col-md-4 scroll-animate">
+            <div class="card service-stamp service-stamp-design h-100">
+              <div class="service-icon"><i class="bi bi-layout-text-window-reverse"></i></div>
+              <h4>Web Design</h4>
+              <p class="service-copy">I shape pages the way a careful writer shapes a paragraph: with balance, rhythm, and a little breathing room, so the first glance already feels like an invitation.</p>
+            </div>
+          </div>
+          <div class="col-md-4 scroll-animate">
+            <div class="card service-stamp service-stamp-dev h-100">
+              <div class="service-icon"><i class="bi bi-code-slash"></i></div>
+              <h4>Frontend Development</h4>
+              <p class="service-copy">I build interfaces that hold together like a well-sealed envelope, responsive, readable, and steady, so the message inside reaches people without friction.</p>
+            </div>
+          </div>
+          <div class="col-md-4 scroll-animate">
+            <div class="card service-stamp service-stamp-student h-100">
+              <div class="service-icon"><i class="bi bi-mortarboard"></i></div>
+              <h4>Student Projects</h4>
+              <p class="service-copy">For school work and early ideas, I like to keep things clear and encouraging, turning rough drafts into something polished enough to send out into the world.</p>
+            </div>
+          </div>
+        </div>
+        <p class="services-bridge scroll-animate">A second line of stamps for the quieter, literary side of the work, where language, structure, and refinement do some of the heavy lifting.</p>
+        <div class="row g-4 justify-content-center mt-4">
+          <div class="col-md-5 scroll-animate-left">
+            <div class="card service-stamp service-stamp-write h-100">
+              <div class="service-icon"><i class="bi bi-pencil-square"></i></div>
+              <h4>Writing & Direction</h4>
+              <p class="service-copy">I help shape words that sound human and feel considered, whether that means sharpening a bio, softening a message, or finding the right voice for a page.</p>
+            </div>
+          </div>
+          <div class="col-md-5 scroll-animate-right">
+            <div class="card service-stamp service-stamp-research h-100">
+              <div class="service-icon"><i class="bi bi-compass"></i></div>
+              <h4>Idea Prototyping</h4>
+              <p class="service-copy">I like turning loose thoughts into something you can actually hold up to the light, test, revise, and send back out stronger than before.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="certifications" class="section-padding">
+        <div class="container text-center">
+            <h2 class="mb-5 fw-bold scroll-animate">Certifications</h2>
+            <div class="row justify-content-center g-4">
+                <div class="col-md-5 d-flex align-items-stretch scroll-animate-left">
+                  <div class="card cert-card stamp-card p-4 shadow-sm w-100 d-flex flex-column" data-bs-toggle="modal" data-bs-target="#cert1Modal" style="cursor: pointer;">
+                        <div class="cert-img-wrapper mb-3">
+                            <img src="images/CERTIFICATE.png" alt="Java Certificate">
+                        </div>
+                        <h5 class="fw-bold mt-2">Fundamentals in Java</h5>
+                        <p class="text-muted small mt-auto">Click to view full certificate</p>
+                    </div>
+                </div>
+                <div class="col-md-5 d-flex align-items-stretch scroll-animate-right">
+                  <div class="card cert-card stamp-card p-4 shadow-sm w-100 d-flex flex-column" data-bs-toggle="modal" data-bs-target="#cert2Modal" style="cursor: pointer;">
+                        <div class="cert-img-wrapper mb-3">
+                            <img src="images/Certificate_2.png" alt="Python Certificate">
+                        </div>
+                        <h5 class="fw-bold mt-2">Python Programming</h5>
+                        <p class="text-muted small mt-auto">Click to view full certificate</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div class="modal fade" id="cert1Modal" tabindex="-1" aria-hidden="true">
+      <div class="modal-dialog modal-lg modal-dialog-centered">
+        <div class="modal-content">
+          <div class="modal-body p-2 text-center">
+            <img src="images/CERTIFICATE.png" class="img-fluid rounded-4" alt="Java Certificate Large">
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="modal fade" id="cert2Modal" tabindex="-1" aria-hidden="true">
+      <div class="modal-dialog modal-lg modal-dialog-centered">
+        <div class="modal-content">
+          <div class="modal-body p-2 text-center">
+            <img src="images/Certificate_2.png" class="img-fluid rounded-4" alt="Python Certificate Large">
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <section id="education" class="section-padding">
+        <div class="container text-center">
+            <h2 class="mb-5 fw-bold scroll-animate">Education</h2>
+        <p class="section-note scroll-animate">Every course is a margin note in a longer manuscript; some chapters are technical, some are made of patience.</p>
+            <div class="row justify-content-center">
+                <div class="col-md-8 scroll-animate">
+              <div class="card stamp-card p-5">
+                        <h4 class="text-primary fw-bold">Bachelor of Science in Information Technology</h4>
+                        <p class="mb-1"><strong>University of Mindanao</strong></p>
+                        <p class="text-muted">2024 – Present</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="projects" class="section-padding">
+      <div class="container text-center">
+        <h2 class="mb-5 fw-bold scroll-animate">My Projects</h2>
+        <p class="section-note scroll-animate">Built like chapters, each one a small proof that the draft can become a room people want to enter.</p>
+        <div class="row g-5 justify-content-center">
+          <div class="col-md-4 scroll-animate">
+            <a href="https://github.com/Daniel-Jhon-Capuno/Capuno-Login_Dashboard-IT9" target="_blank" class="project-icon-link">
+              <img src="images/bubbles.png" class="char-btn" alt="Bubbles">
+              <div class="fw-bold text-white fs-5">Login System</div>
+            </a>
+          </div>
+          <div class="col-md-4 scroll-animate">
+            <a href="https://github.com/Daniel-Jhon-Capuno/Archivia-SHS-Registration-System" target="_blank" class="project-icon-link">
+              <img src="images/BC.png" class="char-btn" alt="Buttercup">
+              <div class="fw-bold text-white fs-5">Archivia SHS</div>
+            </a>
+          </div>
+          <div class="col-md-4 scroll-animate">
+            <a href="https://github.com/Daniel-Jhon-Capuno/Capuno_Biography" target="_blank" class="project-icon-link">
+              <img src="images/Blossom.png" class="char-btn" alt="Blossom">
+              <div class="fw-bold text-white fs-5">Biography Page</div>
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="contact" class="section-padding">
+      <div class="container">
+        <h2 class="mb-5 fw-bold text-center scroll-animate">Contact Me</h2>
+        <p class="section-note text-center scroll-animate">If the page feels like a letter, this is the return address.</p>
+        <div class="row g-5">
+          <div class="col-lg-5">
+            <div class="row g-4">
+              <div class="col-12 scroll-animate-left">
+                <div class="contact-info-card stamp-card p-4 text-center">
+                  <i class="bi bi-envelope-at" style="font-size: 2rem; color: var(--accent-sepia);"></i>
+                  <h5>Email Me</h5>
+                  <p class="mb-0">danieljhoncapuno@gmail.com</p>
+                </div>
+              </div>
+              <div class="col-12 scroll-animate-left">
+                <div class="contact-info-card stamp-card p-4 text-center">
+                  <i class="bi bi-geo-alt" style="font-size: 2rem; color: var(--accent-sepia);"></i>
+                  <h5>Location</h5>
+                  <p class="mb-0">Tagum City, Philippines</p>
+                </div>
+              </div>
+              <div class="col-12 scroll-animate-left">
+                <div class="contact-info-card stamp-card p-4 text-center">
+                  <i class="bi bi-share" style="font-size: 2rem; color: var(--accent-sepia);"></i>
+                  <h5>Socials</h5>
+                  <div class="d-flex justify-content-center gap-4 mt-2">
+                    <a href="YOUR_FACEBOOK_URL" target="_blank" class="text-primary fs-3 social-link"><i class="bi bi-facebook"></i></a>
+                    <a href="YOUR_GITHUB_URL" target="_blank" class="text-primary fs-3 social-link"><i class="bi bi-github"></i></a>
+                    <a href="YOUR_TWITTER_URL" target="_blank" class="text-primary fs-3 social-link"><i class="bi bi-twitter-x"></i></a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          
+          <div class="col-lg-7 scroll-animate-right">
+            <form class="p-5 rounded-4 bg-dark border border-secondary shadow-lg">
+              <div class="mb-3">
+                <label class="form-label text-white small fw-bold">Input name:</label>
+                <input type="text" class="form-control bg-dark text-white border-secondary py-3" placeholder="Input name:">
+              </div>
+              <div class="mb-3">
+                <label class="form-label text-white small fw-bold">Email:</label>
+                <input type="email" class="form-control bg-dark text-white border-secondary py-3" placeholder="Email:">
+              </div>
+              <div class="mb-4">
+                <label class="form-label text-white small fw-bold">Message:</label>
+                <textarea class="form-control bg-dark text-white border-secondary" rows="5" placeholder="Message:"></textarea>
+              </div>
+              <button type="submit" class="btn btn-baby-blue w-100 py-3">SEND MESSAGE</button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <footer class="text-center py-5 bg-dark">
+        <p>© 2026 Daniel Jhon Capuno | Call me if you get lost!</p>
+    </footer>
+
+    <!-- Back to Top Button -->
+    <div class="back-to-top" id="backToTop">
+      <i class="bi bi-arrow-up"></i>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+
+    <script>
+      // Flip Profile Picture Function
+      function flipProfile() {
+        const profile = document.getElementById('profilePicture');
+        profile.classList.toggle('flipped');
+      }
+
+      // Scroll Progress Bar
+      window.addEventListener('scroll', () => {
+        const scrollProgress = document.getElementById('scrollProgress');
+        const windowHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+        const scrolled = (window.scrollY / windowHeight) * 100;
+        scrollProgress.style.width = scrolled + '%';
+      });
+
+      // Back to Top Button
+      const backToTop = document.getElementById('backToTop');
+      window.addEventListener('scroll', () => {
+        if (window.scrollY > 300) {
+          backToTop.classList.add('visible');
+        } else {
+          backToTop.classList.remove('visible');
+        }
+      });
+
+      backToTop.addEventListener('click', () => {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      });
+
+      // Scroll Animation Observer
+      const observerOptions = {
+        threshold: 0.15,
+        rootMargin: '0px 0px -100px 0px'
+      };
+
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('visible');
+          }
+        });
+      }, observerOptions);
+
+      // Wait for DOM to be ready, then observe all scroll-animate elements
+      if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', function() {
+          document.querySelectorAll('.scroll-animate, .scroll-animate-left, .scroll-animate-right').forEach((el) => {
+            observer.observe(el);
+          });
+        });
+      } else {
+        document.querySelectorAll('.scroll-animate, .scroll-animate-left, .scroll-animate-right').forEach((el) => {
+          observer.observe(el);
+        });
+      }
+
+      // Envelope Letter Functions
+      function openEnvelope() {
+        document.getElementById('envelope').classList.add('open');
+        document.getElementById('envelopeHint').style.opacity = '0';
+        setTimeout(() => {
+          document.getElementById('letterCard').classList.add('visible');
+        }, 400);
+      }
+
+      function closeEnvelope() {
+        document.getElementById('letterCard').classList.remove('visible');
+        document.getElementById('envelope').classList.remove('open');
+        document.getElementById('envelopeHint').style.opacity = '1';
+      }
+    </script>
+  </body>
+</html>
