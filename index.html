@@ -97,6 +97,7 @@
         position: relative;
         overflow: hidden;
         padding-top: 120px;
+        padding-bottom: 100px;
       }
 
       .video-background {
@@ -757,6 +758,93 @@
         background: var(--accent-sepia);
         color: #120f0c;
         box-shadow: 0 0 20px rgba(176, 122, 63, 0.28);
+      }
+
+      /* --- HERO CTA: STAMPED TICKET --- */
+      .hero-cta {
+        display: inline-block;
+        text-decoration: none;
+        margin-top: 1.5rem;
+      }
+
+      .hero-cta-stamp {
+        position: relative;
+        display: inline-flex;
+        align-items: center;
+        gap: 0.7rem;
+        padding: 15px 36px 15px 22px;
+        border-radius: 10px;
+        border: 2px dashed rgba(176, 122, 63, 0.75);
+        background: rgba(176, 122, 63, 0.04);
+        color: var(--paper);
+        font-family: 'Fraunces', serif;
+        font-weight: 700;
+        font-style: italic;
+        font-size: 1.05rem;
+        letter-spacing: 0.03em;
+        transform: rotate(-2deg);
+        transition:
+          transform 0.45s cubic-bezier(0.175, 0.885, 0.32, 1.275),
+          background 0.35s ease,
+          border-color 0.35s ease,
+          box-shadow 0.35s ease;
+        overflow: hidden;
+      }
+
+      /* faint perforation dots along the edge, like the stamp cards */
+      .hero-cta-stamp::after {
+        content: '';
+        position: absolute;
+        inset: 0;
+        border-radius: 10px;
+        background:
+          radial-gradient(circle at top, rgba(255,255,255,0.7) 0 3px, transparent 3.4px) top center / 14px 14px repeat-x,
+          radial-gradient(circle at bottom, rgba(255,255,255,0.7) 0 3px, transparent 3.4px) bottom center / 14px 14px repeat-x;
+        opacity: 0.12;
+        pointer-events: none;
+        mix-blend-mode: screen;
+      }
+
+      .hero-cta-postmark {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        width: 26px;
+        height: 26px;
+        border-radius: 50%;
+        border: 1.5px solid rgba(176, 122, 63, 0.7);
+        color: var(--accent-sepia);
+        font-size: 0.85rem;
+        transform: rotate(-14deg);
+        transition: transform 0.45s cubic-bezier(0.175, 0.885, 0.32, 1.275), color 0.35s ease, background 0.35s ease, border-color 0.35s ease;
+        flex-shrink: 0;
+      }
+
+      .hero-cta-text {
+        position: relative;
+      }
+
+      .hero-cta:hover .hero-cta-stamp {
+        transform: rotate(0deg) translateY(-4px);
+        border-color: var(--accent-sepia);
+        background: rgba(176, 122, 63, 0.14);
+        box-shadow: 0 16px 30px rgba(176, 122, 63, 0.3);
+      }
+
+      .hero-cta:hover .hero-cta-postmark {
+        transform: rotate(0deg) scale(1.12);
+        color: #120f0c;
+        background: var(--accent-sepia);
+        border-color: var(--accent-sepia);
+      }
+
+      .hero-cta:focus-visible .hero-cta-stamp {
+        outline: 2px solid var(--accent-sepia);
+        outline-offset: 3px;
+      }
+
+      @media (prefers-reduced-motion: reduce) {
+        .hero-cta-stamp, .hero-cta-postmark { transition: none; }
       }
 
       .modal-content {
@@ -1718,9 +1806,593 @@
           transition: opacity 0.3s ease, visibility 0.3s ease;
         }
       }
+
+      /* ============================================
+         QUILL INTRO SCREEN — Dark Mahogany Desk
+         ============================================ */
+
+      .quill-intro {
+        position: fixed;
+        inset: 0;
+        z-index: 200000;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        overflow: hidden;
+        transition: opacity 0.8s ease;
+
+        /* Deep mahogany wood base */
+        background-color: #2a1a0e;
+
+        /* Wood grain layers — light grain streaks over dark base */
+        background-image:
+          /* Fine highlight grain */
+          repeating-linear-gradient(
+            88deg,
+            transparent 0px,
+            transparent 18px,
+            rgba(255, 220, 160, 0.028) 19px,
+            rgba(255, 220, 160, 0.028) 20px
+          ),
+          repeating-linear-gradient(
+            91deg,
+            transparent 0px,
+            transparent 38px,
+            rgba(255, 200, 120, 0.022) 39px,
+            rgba(255, 200, 120, 0.022) 41px
+          ),
+          /* Medium grain bands */
+          repeating-linear-gradient(
+            89.2deg,
+            transparent 0px,
+            transparent 62px,
+            rgba(200, 140, 70, 0.045) 63px,
+            rgba(200, 140, 70, 0.045) 65px,
+            transparent 66px,
+            transparent 110px,
+            rgba(160, 100, 40, 0.055) 111px,
+            rgba(160, 100, 40, 0.055) 113px
+          ),
+          /* Wide dark grain streaks */
+          repeating-linear-gradient(
+            87.5deg,
+            transparent 0px,
+            transparent 120px,
+            rgba(80, 40, 10, 0.18) 121px,
+            rgba(80, 40, 10, 0.18) 130px,
+            transparent 131px,
+            transparent 280px,
+            rgba(60, 28, 8, 0.22) 281px,
+            rgba(60, 28, 8, 0.22) 295px
+          ),
+          /* Knot-like radial warmth zones */
+          radial-gradient(ellipse 60% 28% at 18% 42%, rgba(180, 100, 30, 0.18), transparent),
+          radial-gradient(ellipse 40% 20% at 78% 68%, rgba(150, 80, 20, 0.14), transparent),
+          radial-gradient(ellipse 50% 30% at 55% 20%, rgba(200, 120, 50, 0.10), transparent),
+          /* Ambient light from above — desk lamp feel */
+          radial-gradient(ellipse 80% 55% at 50% 0%, rgba(255, 200, 130, 0.12), transparent 62%),
+          /* Dark vignette edges */
+          radial-gradient(ellipse 110% 100% at 50% 50%, transparent 48%, rgba(10, 5, 2, 0.65) 100%),
+          /* Base mahogany tone */
+          linear-gradient(175deg, #3a2010 0%, #2a1808 40%, #1e1206 100%);
+      }
+
+      /* Subtle sheen / lacquer effect */
+      .quill-intro::before {
+        content: '';
+        position: absolute;
+        inset: 0;
+        background:
+          linear-gradient(135deg,
+            rgba(255, 230, 170, 0.055) 0%,
+            transparent 38%,
+            rgba(0,0,0,0.12) 100%);
+        pointer-events: none;
+        z-index: 0;
+      }
+
+      /* Faint dust-grain noise overlay */
+      .quill-intro::after {
+        content: '';
+        position: absolute;
+        inset: 0;
+        background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='200' height='200' filter='url(%23n)' opacity='0.038'/%3E%3C/svg%3E");
+        background-repeat: repeat;
+        background-size: 200px 200px;
+        mix-blend-mode: overlay;
+        opacity: 0.55;
+        pointer-events: none;
+        z-index: 0;
+      }
+
+      /* Desk accessories — ink bottle left, open book right */
+      .desk-prop {
+        position: absolute;
+        font-size: 3.2rem;
+        pointer-events: none;
+        user-select: none;
+        z-index: 1;
+        filter: drop-shadow(0 8px 18px rgba(0,0,0,0.55));
+      }
+
+      .desk-prop-inkwell {
+        bottom: 9%;
+        left: 5%;
+        font-size: 2.6rem;
+        transform: rotate(-8deg);
+        opacity: 0.72;
+        animation: prop-breathe 6s ease-in-out infinite;
+      }
+
+      .desk-prop-book {
+        top: 8%;
+        right: 4%;
+        font-size: 3rem;
+        transform: rotate(6deg);
+        opacity: 0.6;
+        animation: prop-breathe 7s ease-in-out infinite reverse;
+        animation-delay: 1.5s;
+      }
+
+      .desk-prop-candle {
+        bottom: 7%;
+        right: 6%;
+        font-size: 2.4rem;
+        transform: rotate(5deg);
+        opacity: 0.68;
+        animation: prop-breathe 5s ease-in-out infinite;
+        animation-delay: 0.8s;
+      }
+
+      .desk-prop-glasses {
+        top: 11%;
+        left: 4%;
+        font-size: 2rem;
+        transform: rotate(-12deg);
+        opacity: 0.5;
+        animation: prop-breathe 8s ease-in-out infinite reverse;
+        animation-delay: 2s;
+      }
+
+      @keyframes prop-breathe {
+        0%, 100% { transform: rotate(-8deg) translateY(0); }
+        50%       { transform: rotate(-8deg) translateY(-6px); }
+      }
+
+      /* Candle glow — warm light pooling on the desk surface */
+      .desk-candle-glow {
+        position: absolute;
+        bottom: 0;
+        right: 5%;
+        width: 280px;
+        height: 280px;
+        border-radius: 50%;
+        background: radial-gradient(circle, rgba(255, 190, 80, 0.16) 0%, rgba(255, 140, 30, 0.08) 40%, transparent 72%);
+        pointer-events: none;
+        z-index: 1;
+        animation: candle-glow-pulse 2.8s ease-in-out infinite alternate;
+      }
+
+      @keyframes candle-glow-pulse {
+        0%   { opacity: 0.7; transform: scale(1); }
+        100% { opacity: 1;   transform: scale(1.08); }
+      }
+
+      /* Paper + seal wrapper */
+      .intro-paper-wrap {
+        position: relative;
+        z-index: 2;
+        animation: paper-arrive 1s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+      }
+
+      @keyframes paper-arrive {
+        0%   { opacity: 0; transform: translateY(50px) scale(0.94) rotate(-1.5deg); }
+        100% { opacity: 1; transform: translateY(0)    scale(1)    rotate(0deg); }
+      }
+
+      /* The paper itself */
+      .intro-paper {
+        position: relative;
+        width: min(500px, 92vw);
+        background:
+          /* Paper watermark — faint grid */
+          repeating-linear-gradient(0deg,   transparent, transparent 31px, rgba(176,122,63,0.07) 32px),
+          repeating-linear-gradient(90deg,  transparent, transparent 31px, rgba(176,122,63,0.02) 32px),
+          /* Paper toning — slightly yellowed */
+          radial-gradient(ellipse at 18% 12%, rgba(255,240,200,0.45), transparent 45%),
+          radial-gradient(ellipse at 82% 88%, rgba(220,195,150,0.25), transparent 40%),
+          linear-gradient(175deg, #faf5e8 0%, #f2e8d0 55%, #e8dabb 100%);
+        border-radius: 2px 2px 3px 3px;
+        padding: 2.6rem 2.8rem 2.2rem;
+        box-shadow:
+          /* Main drop shadow on wood */
+          0 40px 80px rgba(0,0,0,0.7),
+          0 16px 32px rgba(0,0,0,0.5),
+          /* Soft paper edge highlight */
+          0 0 0 1px rgba(255,255,255,0.22),
+          /* Warm ambient from desk lamp */
+          0 -4px 18px rgba(255,200,100,0.08),
+          inset 0 1px 0 rgba(255,255,255,0.9);
+        transform-origin: center bottom;
+      }
+
+      /* Left margin line (red) */
+      .intro-paper::before {
+        content: '';
+        position: absolute;
+        top: 0; bottom: 0; left: 56px;
+        width: 1.5px;
+        background: linear-gradient(180deg, rgba(196,91,116,0) 0%, rgba(196,91,116,0.35) 8%, rgba(196,91,116,0.35) 92%, rgba(196,91,116,0) 100%);
+        pointer-events: none;
+        border-radius: 1px;
+      }
+
+      /* Curled bottom-right corner */
+      .intro-paper::after {
+        content: '';
+        position: absolute;
+        bottom: 0; right: 0;
+        width: 32px; height: 32px;
+        background: linear-gradient(225deg,
+          #c8b898 0%,
+          #ddd0b8 42%,
+          transparent 58%);
+        border-radius: 0 0 3px 0;
+        pointer-events: none;
+        filter: drop-shadow(-3px -3px 4px rgba(0,0,0,0.12));
+      }
+
+      /* Letterhead */
+      .intro-paper-letterhead {
+        font-family: 'Inter', sans-serif;
+        font-size: 0.66rem;
+        font-weight: 800;
+        letter-spacing: 0.26em;
+        text-transform: uppercase;
+        color: var(--accent-sepia);
+        text-align: center;
+        margin-bottom: 0.18rem;
+        position: relative;
+        z-index: 1;
+        opacity: 0.85;
+      }
+
+      .intro-paper-rule {
+        border: none;
+        border-top: 1px solid rgba(43, 36, 29, 0.18);
+        margin: 0.5rem 0 1rem;
+        position: relative;
+        z-index: 1;
+      }
+
+      .intro-paper-heading {
+        font-family: 'Fraunces', serif;
+        font-weight: 700;
+        font-size: 1.6rem;
+        color: #22180f;
+        text-align: center;
+        line-height: 1.22;
+        margin-bottom: 0.22rem;
+        position: relative;
+        z-index: 1;
+        letter-spacing: 0.01em;
+      }
+
+      .intro-paper-sub {
+        font-family: 'Cormorant Garamond', serif;
+        font-style: italic;
+        font-size: 1.02rem;
+        color: rgba(43, 36, 29, 0.58);
+        text-align: center;
+        margin-bottom: 1.5rem;
+        position: relative;
+        z-index: 1;
+      }
+
+      /* Canvas area */
+      .intro-canvas-wrap {
+        position: relative;
+        z-index: 1;
+        margin-bottom: 0.35rem;
+        /* Subtle highlight behind writing area */
+        background: rgba(255,255,255,0.18);
+        border-radius: 2px 2px 0 0;
+      }
+
+      .intro-canvas-x {
+        position: absolute;
+        left: 10px;
+        bottom: 10px;
+        font-family: 'Caveat', cursive;
+        font-size: 1.5rem;
+        font-weight: 700;
+        color: rgba(43, 36, 29, 0.28);
+        pointer-events: none;
+        user-select: none;
+        line-height: 1;
+      }
+
+      #signatureCanvas {
+        display: block;
+        width: 100%;
+        height: 108px;
+        border-bottom: 2px solid rgba(43, 36, 29, 0.28);
+        cursor: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='20' height='20' viewBox='0 0 24 24'%3E%3Cpath fill='%231b1612' d='M3 17.25V21h3.75L17.81 9.94l-3.75-3.75L3 17.25zM20.71 7.04a1 1 0 0 0 0-1.41l-2.34-2.34a1 1 0 0 0-1.41 0l-1.83 1.83 3.75 3.75 1.83-1.83z'/%3E%3C/svg%3E") 2 18, crosshair;
+        touch-action: none;
+        background: transparent;
+      }
+
+      .intro-canvas-label {
+        font-family: 'Inter', sans-serif;
+        font-size: 0.63rem;
+        font-weight: 700;
+        letter-spacing: 0.18em;
+        text-transform: uppercase;
+        color: rgba(43, 36, 29, 0.36);
+        text-align: center;
+        margin-top: 0.32rem;
+        margin-bottom: 1.4rem;
+        position: relative;
+        z-index: 1;
+      }
+
+      /* Actions row */
+      .intro-paper-actions {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        position: relative;
+        z-index: 1;
+      }
+
+      .btn-intro-clear {
+        background: transparent;
+        border: 1px solid rgba(43, 36, 29, 0.18);
+        border-radius: 20px;
+        font-family: 'Cormorant Garamond', serif;
+        font-size: 0.95rem;
+        color: rgba(43, 36, 29, 0.45);
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        gap: 0.35rem;
+        padding: 0.45rem 0.9rem;
+        transition: color 0.2s, border-color 0.2s, background 0.2s;
+      }
+
+      .btn-intro-clear:hover {
+        color: rgba(43, 36, 29, 0.72);
+        border-color: rgba(43, 36, 29, 0.32);
+        background: rgba(43, 36, 29, 0.04);
+      }
+
+      .btn-intro-seal {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.55rem;
+        padding: 13px 32px;
+        border-radius: 30px;
+        border: none;
+        background: linear-gradient(135deg, var(--accent-sepia), var(--accent-wine));
+        color: #fff5e8;
+        font-family: 'Fraunces', serif;
+        font-weight: 700;
+        font-style: italic;
+        font-size: 1.08rem;
+        letter-spacing: 0.02em;
+        cursor: pointer;
+        box-shadow:
+          0 12px 28px rgba(142, 61, 77, 0.42),
+          inset 0 1px 1px rgba(255,255,255,0.28);
+        transition: transform 0.28s ease, box-shadow 0.28s ease;
+      }
+
+      .btn-intro-seal:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 18px 36px rgba(142, 61, 77, 0.52), inset 0 1px 1px rgba(255,255,255,0.28);
+      }
+
+      .btn-intro-seal:disabled {
+        opacity: 0.5;
+        cursor: not-allowed;
+        transform: none;
+      }
+
+      /* Wax seal drop */
+      .intro-wax-seal {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        width: 96px;
+        height: 92px;
+        border-radius: 52% 48% 50% 50% / 46% 44% 56% 54%;
+        background:
+          radial-gradient(circle at 32% 28%, rgba(255,255,255,0.4), rgba(255,255,255,0) 28%),
+          radial-gradient(circle at 50% 42%, #bce7fb 0%, var(--baby-blue) 55%, #5ebbf0 84%, #469dd2 100%);
+        border: 1px solid rgba(255,255,255,0.18);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-family: 'Fraunces', serif;
+        font-weight: 900;
+        font-style: italic;
+        font-size: 1.5rem;
+        color: #163244;
+        text-shadow: 0 1px 0 rgba(255,255,255,0.38);
+        box-shadow:
+          0 16px 38px rgba(0,0,0,0.6),
+          inset 0 2px 5px rgba(255,255,255,0.38),
+          inset 0 -8px 12px rgba(0,0,0,0.14);
+        pointer-events: none;
+        z-index: 20;
+        transform: translate(-50%, calc(-50% - 200px)) scale(0) rotate(-30deg);
+        opacity: 0;
+      }
+
+      .intro-wax-seal::before {
+        content: '';
+        position: absolute;
+        left: 12px; bottom: -13px;
+        width: 22px; height: 24px;
+        background: linear-gradient(180deg, #7ec6e8, #5ebbf0 70%, #4b9fd3);
+        border-radius: 48% 48% 60% 60% / 38% 38% 72% 72%;
+        transform: rotate(10deg);
+        box-shadow: 0 4px 10px rgba(0,0,0,0.22), inset 0 2px 3px rgba(255,255,255,0.2);
+      }
+
+      .intro-wax-seal.is-stamping {
+        animation: intro-seal-stamp 0.8s cubic-bezier(0.22, 1.1, 0.36, 1) forwards;
+      }
+
+      @keyframes intro-seal-stamp {
+        0%   { transform: translate(-50%, calc(-50% - 200px)) scale(0.2) rotate(-30deg); opacity: 0; }
+        35%  { opacity: 1; }
+        62%  { transform: translate(-50%, calc(-50% + 12px)) scale(1.16) rotate(5deg);  opacity: 1; }
+        76%  { transform: translate(-50%, calc(-50% - 6px))  scale(0.94) rotate(-2deg); opacity: 1; }
+        88%  { transform: translate(-50%, calc(-50% + 3px))  scale(1.05) rotate(1deg);  opacity: 1; }
+        100% { transform: translate(-50%, -50%) scale(1) rotate(0deg); opacity: 1; }
+      }
+
+      /* Quote overlay */
+      .intro-quote-overlay {
+        position: absolute;
+        inset: 0;
+        border-radius: 2px 2px 3px 3px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        padding: 2.2rem 2.8rem;
+        background:
+          radial-gradient(ellipse at 18% 12%, rgba(255,240,200,0.45), transparent 45%),
+          linear-gradient(175deg, rgba(250,245,232,0.97), rgba(236,226,205,0.98));
+        opacity: 0;
+        pointer-events: none;
+        z-index: 15;
+        transition: opacity 0.6s ease;
+      }
+
+      .intro-quote-overlay.is-visible { opacity: 1; }
+
+      .intro-quote-mark {
+        font-family: 'Fraunces', serif;
+        font-size: 5rem;
+        font-weight: 900;
+        color: rgba(176, 122, 63, 0.18);
+        line-height: 0.8;
+        margin-bottom: 0.2rem;
+        align-self: flex-start;
+      }
+
+      .intro-quote-text {
+        font-family: 'Cormorant Garamond', serif;
+        font-style: italic;
+        font-size: 1.28rem;
+        line-height: 1.72;
+        color: #22180f;
+        text-align: center;
+        max-width: 30ch;
+      }
+
+      .intro-quote-author {
+        font-family: 'Caveat', cursive;
+        font-weight: 600;
+        font-size: 1.15rem;
+        color: var(--accent-wine);
+        margin-top: 1.1rem;
+        align-self: flex-end;
+      }
+
+      /* Paper exit */
+      .intro-paper-wrap.is-sealing {
+        animation: paper-exit 1.15s cubic-bezier(0.7, 0.0, 0.9, 0.5) forwards;
+      }
+
+      @keyframes paper-exit {
+        0%   { transform: translateY(0) scale(1) rotate(0deg); opacity: 1; filter: brightness(1); }
+        30%  { transform: translateY(6px) scale(0.96) rotate(0.8deg); opacity: 1; filter: brightness(0.98); }
+        100% { transform: translateY(220px) scale(0.04) rotate(7deg); opacity: 0; filter: brightness(0.5); }
+      }
+
+      /* Full intro exit */
+      .quill-intro.is-exiting {
+        opacity: 0;
+        pointer-events: none;
+      }
+
+      @media (max-width: 576px) {
+        .intro-paper { padding: 2rem 1.8rem 1.7rem; }
+        .intro-paper-heading { font-size: 1.32rem; }
+        #signatureCanvas { height: 82px; }
+        .intro-quote-text { font-size: 1.05rem; }
+        .btn-intro-seal { padding: 11px 22px; font-size: 0.95rem; }
+        .desk-prop { display: none; }
+        .desk-candle-glow { display: none; }
+      }
+
+      @media (prefers-reduced-motion: reduce) {
+        .intro-paper-wrap { animation: none; opacity: 1; }
+        .intro-wax-seal.is-stamping { animation: none !important; opacity: 1; transform: translate(-50%, -50%) scale(1); }
+        .intro-paper-wrap.is-sealing { animation: none !important; opacity: 0; }
+        .quill-intro.is-exiting { opacity: 0; }
+        .desk-prop, .desk-candle-glow { animation: none; }
+      }
     </style>
   </head>
   <body class="is-loading">
+
+    <!-- ==========================================
+         QUILL INTRO SCREEN — Mahogany Writing Desk
+         ========================================== -->
+    <div class="quill-intro" id="quillIntro" role="dialog" aria-modal="true" aria-label="Sign the guest book to enter">
+
+      <!-- Desk accessories -->
+      <span class="desk-prop desk-prop-inkwell" aria-hidden="true">🖋️</span>
+      <span class="desk-prop desk-prop-book"    aria-hidden="true">📖</span>
+      <span class="desk-prop desk-prop-candle"  aria-hidden="true">🕯️</span>
+      <span class="desk-prop desk-prop-glasses" aria-hidden="true">🕶️</span>
+
+      <!-- Candle glow pool on the desk surface -->
+      <div class="desk-candle-glow" aria-hidden="true"></div>
+
+      <!-- Paper + wax seal -->
+      <div class="intro-paper-wrap" id="introPaperWrap">
+        <div class="intro-paper" id="introPaper">
+
+          <p class="intro-paper-letterhead">Dansoyportfolio &mdash; Guest Register</p>
+          <hr class="intro-paper-rule">
+          <h2 class="intro-paper-heading" style="color:#22180f; font-family:'Fraunces',serif;">Before you turn the page —</h2>
+          <p class="intro-paper-sub">leave your mark in the guest book.</p>
+
+          <div class="intro-canvas-wrap">
+            <span class="intro-canvas-x" aria-hidden="true">✕</span>
+            <canvas id="signatureCanvas" aria-label="Draw your initials here"></canvas>
+          </div>
+          <p class="intro-canvas-label">your initials, please</p>
+
+          <div class="intro-paper-actions">
+            <button class="btn-intro-clear" id="introClearBtn" type="button" onclick="introClear()">
+              <i class="bi bi-arrow-counterclockwise"></i> Clear
+            </button>
+            <button class="btn-intro-seal" id="introSealBtn" type="button" onclick="introSeal()">
+              Seal &amp; Enter <i class="bi bi-feather"></i>
+            </button>
+          </div>
+
+          <!-- Quote overlay (revealed after seal stamps) -->
+          <div class="intro-quote-overlay" id="introQuoteOverlay" aria-hidden="true">
+            <span class="intro-quote-mark" aria-hidden="true">&ldquo;</span>
+            <p class="intro-quote-text">A book must be the axe for the frozen sea within us.</p>
+            <span class="intro-quote-author">&mdash; Franz Kafka</span>
+          </div>
+
+        </div><!-- /.intro-paper -->
+
+        <!-- Wax seal (animates down on confirm) -->
+        <div class="intro-wax-seal" id="introWaxSeal" aria-hidden="true">DJ</div>
+
+      </div><!-- /.intro-paper-wrap -->
+    </div><!-- /.quill-intro -->
 
     <!-- Ink Loading Screen -->
     <div class="loading-screen" id="loadingScreen" aria-hidden="true">
@@ -1783,7 +2455,12 @@
         <p class="hero-quote">"In the margins, I keep the part of the story that survives the draft."</p>
         <p class="hero-caption">A portfolio written like a room full of marked pages, weathered notes, and unfinished thoughts that still insist on becoming something.</p>
         <br>
-        <a href="#projects" class="btn btn-baby-blue btn-lg mt-3">View My Work</a>
+        <a href="#projects" class="hero-cta">
+          <span class="hero-cta-stamp">
+            <span class="hero-cta-postmark"><i class="bi bi-feather"></i></span>
+            <span class="hero-cta-text">Turn the Page</span>
+          </span>
+        </a>
       </div>
     </section>
 
@@ -2029,7 +2706,6 @@
         <p>© 2026 Daniel Jhon Capuno | Call me if you get lost!</p>
     </footer>
 
-    <!-- Back to Top Button -->
     <!-- Back to Top: Candle -->
     <div class="back-to-top" id="backToTop" role="button" tabindex="0" aria-label="Blow out the candle and return to the top">
       <div class="candle-flame"></div>
@@ -2073,25 +2749,136 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 
     <script>
-      // Ink Loading Screen
+      // ============================================
+      // QUILL INTRO SCREEN
+      // ============================================
+      (function () {
+        const intro      = document.getElementById('quillIntro');
+        const paperWrap  = document.getElementById('introPaperWrap');
+        const canvas     = document.getElementById('signatureCanvas');
+        const waxSeal    = document.getElementById('introWaxSeal');
+        const quoteEl    = document.getElementById('introQuoteOverlay');
+        const sealBtn    = document.getElementById('introSealBtn');
+        const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+        if (!canvas) return;
+        const ctx = canvas.getContext('2d');
+
+        function setupCanvas() {
+          const dpr  = window.devicePixelRatio || 1;
+          const rect = canvas.getBoundingClientRect();
+          if (!rect.width) return; // not laid out yet
+          canvas.width  = rect.width  * dpr;
+          canvas.height = rect.height * dpr;
+          ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+          ctx.strokeStyle = '#1b1612';
+          ctx.lineWidth   = 2.6;
+          ctx.lineCap     = 'round';
+          ctx.lineJoin    = 'round';
+        }
+
+        // Defer until fonts & layout settle
+        requestAnimationFrame(() => requestAnimationFrame(setupCanvas));
+        window.addEventListener('resize', setupCanvas);
+
+        let drawing = false;
+
+        function getXY(e) {
+          const rect  = canvas.getBoundingClientRect();
+          const src   = e.touches ? e.touches[0] : e;
+          return { x: src.clientX - rect.left, y: src.clientY - rect.top };
+        }
+
+        function startDraw(e) {
+          drawing = true;
+          const p = getXY(e);
+          ctx.beginPath();
+          ctx.moveTo(p.x, p.y);
+        }
+
+        function draw(e) {
+          if (!drawing) return;
+          const p = getXY(e);
+          ctx.lineTo(p.x, p.y);
+          ctx.stroke();
+          ctx.beginPath();
+          ctx.moveTo(p.x, p.y);
+        }
+
+        function stopDraw() { drawing = false; }
+
+        canvas.addEventListener('mousedown',  startDraw);
+        canvas.addEventListener('mousemove',  draw);
+        canvas.addEventListener('mouseup',    stopDraw);
+        canvas.addEventListener('mouseleave', stopDraw);
+        canvas.addEventListener('touchstart', e => { e.preventDefault(); startDraw(e); }, { passive: false });
+        canvas.addEventListener('touchmove',  e => { e.preventDefault(); draw(e);      }, { passive: false });
+        canvas.addEventListener('touchend',   stopDraw);
+
+        window.introClear = function () {
+          ctx.clearRect(0, 0, canvas.width, canvas.height);
+        };
+
+        window.introSeal = function () {
+          sealBtn.disabled = true;
+
+          if (reduceMotion) {
+            // Skip all animations — just dismiss
+            intro.classList.add('is-exiting');
+            setTimeout(() => {
+              intro.remove();
+              window.dispatchEvent(new Event('introComplete'));
+            }, 400);
+            return;
+          }
+
+          // 1. Drop the wax seal onto the signature
+          waxSeal.classList.add('is-stamping');
+
+          // 2. Reveal the Kafka quote underneath the seal
+          setTimeout(() => {
+            quoteEl.classList.add('is-visible');
+          }, 820);
+
+          // 3. Paper folds away
+          setTimeout(() => {
+            paperWrap.classList.add('is-sealing');
+          }, 1700);
+
+          // 4. Whole intro fades — loading screen takes over
+          setTimeout(() => {
+            intro.classList.add('is-exiting');
+          }, 2600);
+
+          // 5. Remove intro, signal loader
+          setTimeout(() => {
+            intro.remove();
+            window.dispatchEvent(new Event('introComplete'));
+          }, 3350);
+        };
+      })();
+
+      // ============================================
+      // INK LOADING SCREEN — waits for intro signal
+      // ============================================
       (function () {
         const loader = document.getElementById('loadingScreen');
         const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-        const minDisplay = reduceMotion ? 300 : 3000;
 
         function dismissLoader() {
-          if (!loader) return;
+          if (!loader || !loader.parentNode) return;
           loader.classList.add(reduceMotion ? 'is-hidden' : 'is-draining');
           document.body.classList.remove('is-loading');
-          setTimeout(() => loader.remove(), reduceMotion ? 400 : 1300);
+          setTimeout(() => { if (loader.parentNode) loader.remove(); }, reduceMotion ? 400 : 1300);
         }
 
-        window.addEventListener('load', () => {
-          setTimeout(dismissLoader, minDisplay);
+        // Only start the dismissal countdown once the intro has completed
+        window.addEventListener('introComplete', () => {
+          setTimeout(dismissLoader, reduceMotion ? 300 : 2200);
         });
 
-        // Safety net in case the load event is delayed by slow assets
-        setTimeout(dismissLoader, 6000);
+        // Hard safety net (30s) in case something goes wrong
+        setTimeout(dismissLoader, 30000);
       })();
 
       // Flip Profile Picture Function
